@@ -38,7 +38,6 @@ public class ClientCache {
 		   client.sendEvent(event, data);
 	   }
    }
-   
    //Agent
    public void setAgentClients(AgentClient agentClients){
 	   this.agentClients=agentClients;
