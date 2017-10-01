@@ -3,6 +3,7 @@ package com.yxm.util.server.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
+import com.yxm.core.Context;
 import com.yxm.util.cache.ClientCache;
 import com.yxm.util.server.message.ChatMessage;
 
@@ -44,15 +46,16 @@ public class IMEventHandler {
 	   String sessionId = client.getHandshakeData().getSingleUrlParam("sessionId");
 	   System.out.println("*******onConnect**********");
 	   System.out.println("userId:"+userId+" userName:"+userName+" sessionId:"+sessionId);
-	   
+	   System.out.println("serverNameSpace:"+Context.NameSpaceEnum.IM.getNamespace());
 	   //加入缓存
-	   this.userlist.add(userId);
-	   ClientCache.getInstance().putIMEventClient(userId, client);
-	   
+	   if(!StringUtils.isBlank(userId)){
+		   this.userlist.add(userId);
+		   ClientCache.getInstance().putIMEventClient(userId, client);
+	   }
    }
    
    //消息入口
-   @OnEvent(value="message")
+   @OnEvent(value = "message")
    public void onEvent(SocketIOClient client,AckRequest request,ChatMessage message){
 	   System.out.println(" 发送消息 ["+message+"]");
 	   
@@ -70,7 +73,6 @@ public class IMEventHandler {
 	   System.out.println("userlist"+userlist.toString());
 	   System.out.println("*******message**********");
    }
-   
    //断开连接
    @OnDisconnect 
    public void onDisconnect(SocketIOClient client){

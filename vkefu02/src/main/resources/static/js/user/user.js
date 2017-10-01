@@ -1,6 +1,6 @@
     //var socket = io.connect('${schema}://'+hostname+':${port}/im/user?userid=${userid!''}&userName=${userName!''}&session=${sessionid!''}');
     //var socket = io.connect('http://localhost:8078/im/user?userId='+userId+'&userName='+userName+'sessionId='+sessionId+'');
-    var socket = io.connect('http://localhost:8078');
+    var socket = io.connect('http://localhost:8078/im/user?userId='+userId+'&userName='+userName+'&sessionId='+sessionId+'');
     socket.on('connect',function() {
         output('<span class="connect-msg">Client has connected to the server!</span>');
     });
