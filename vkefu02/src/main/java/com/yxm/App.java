@@ -42,7 +42,7 @@ public class App
 		});
 		final SocketIOServer socketIOServer = new SocketIOServer(configuration);
 		System.out.println("namespace"+Context.NameSpaceEnum.IM.toString());
-		socketIOServer.addNamespace(Context.NameSpaceEnum.IM.getNamespace());//绑定namespace
+		//socketIOServer.addNamespace(Context.NameSpaceEnum.IM.getNamespace());//绑定namespace
 		socketIOServer.addNamespace(Context.NameSpaceEnum.AGENT.getNamespace());
 		System.out.println("Configuration host"+host+" port"+port+" socketIOServer"+socketIOServer);
 		return socketIOServer;

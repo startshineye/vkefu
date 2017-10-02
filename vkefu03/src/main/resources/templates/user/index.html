@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Socketio chat</title>
+<script src="/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/socket.io.js"></script>
+<style>
+body {
+    padding: 20px;
+}
+#console {
+    height: 400px;
+    overflow: auto;
+}
+.username-msg {
+    color: orange;
+}
+.connect-msg {
+    color: green;
+}
+.disconnect-msg {
+    color: red;
+}
+.send-msg {
+    color: #888
+}
+</style>
+</head>
+<body>
+    <h1>Netty-socketio chat demo</h1>
+    <br />
+    <div id="console" class="well"></div>
+    <form class="well form-inline" onsubmit="return false;">
+        <input id="name" class="input-xlarge" type="text" placeholder="用户名称. . . " />
+        <input id="msg" class="input-xlarge" type="text" placeholder="发送内容. . . " />
+        <button type="button" onclick="sendMessage();" class="btn">Send</button>
+        <button type="button" onclick="sendDisconnect();" class="btn">Disconnect</button>
+    </form>
+</body>
+
+</html>
