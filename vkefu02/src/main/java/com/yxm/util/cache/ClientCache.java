@@ -35,7 +35,9 @@ public class ClientCache {
    public void sendIMEventMessage(String id,String event,Object data){
 	   List<SocketIOClient> clients = imClients.getClients(id);
 	   for (SocketIOClient client : clients) {
+		   
 		   client.sendEvent(event, data);
+		   System.out.println(client+" clientCache "+id+" 发送:"+data);
 	   }
    }
    //Agent
