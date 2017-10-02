@@ -29,7 +29,7 @@ public class IMEventHandler {
    private final SocketIOServer server;
    
    private final List<String> userlist = new ArrayList<String>();
-   private final List<SocketIOClient> iolist = new ArrayList<SocketIOClient>();
+  // private final List<SocketIOClient> iolist = new ArrayList<SocketIOClient>();
    @Autowired
    public IMEventHandler(SocketIOServer server){
 	   this.server = server;
@@ -44,19 +44,17 @@ public class IMEventHandler {
 	   String userId = client.getHandshakeData().getSingleUrlParam("userId");
 	   String userName = client.getHandshakeData().getSingleUrlParam("userName");
 	   String sessionId = client.getHandshakeData().getSingleUrlParam("sessionId");
-	   System.out.println("*******onConnect**********"+client);
+	   System.out.println("*******onConnect**********"+client+" userlist"+userlist);
 	   System.out.println("userId:"+userId+" userName:"+userName+" sessionId:"+sessionId);
 	   System.out.println("serverNameSpace:"+Context.NameSpaceEnum.IM.getNamespace());
 	   //加入缓存
-	  /* if(!StringUtils.isBlank(userId)){
-		   System.out.println("onConnect addlist"+userId+" size="+this.userlist.size());
+	   ClientCache.getInstance().putIMEventClient(userId, client);
+	   if(!StringUtils.isBlank(userId)){
 		   if(!this.userlist.contains(userId)){
-			   ClientCache.getInstance().putIMEventClient(userId, client);
+			   System.out.println(!this.userlist.contains(userId)+"onConnect addlist"+userId+" size="+this.userlist.size());
 			   this.userlist.add(userId);
 		   }
-		   
-	   }*/
-	   this.iolist.add(client);
+	   }
    }
    
    //消息入口
@@ -72,14 +70,12 @@ public class IMEventHandler {
 	   //推送消息
 	   //client.sendEvent("message", chatMessage);
 	   System.out.println("userlist size"+userlist.size());
-	   for (SocketIOClient io : iolist) {
-		   //System.out.println("userid"+userid);
-		   io.sendEvent("message", chatMessage);
-		//ClientCache.getInstance().sendIMEventMessage(userid, "message", chatMessage);
+	   for (String userid : userlist) {
+		  ClientCache.getInstance().sendIMEventMessage(userid, "message", chatMessage);
 	    }
 	  //client.sendEvent("message", chatMessage);
 	   System.out.println("userlist"+userlist.toString());
-	   System.out.println("*******message**********"+client);
+	   System.out.println("*******message**********"+client+" userlist"+userlist);
    }
    //断开连接
    @OnDisconnect 

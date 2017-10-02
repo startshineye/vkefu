@@ -3,7 +3,8 @@ package com.yxm.core;
 public class Context {
   
 	public enum NameSpaceEnum{
-		IM("/im/user");
+		IM("/im/user"),
+		AGENT("/im/agent");
 		
 		private String namespace;
 		public String getNamespace() {

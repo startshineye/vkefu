@@ -30,7 +30,6 @@ public class App
 		configuration.setHostname(host);
 		configuration.setPort(port);
 		
-		System.out.println("Configuration host"+host+" port"+port);
 		 //该处可以用来进行身份验证 
 		configuration.setAuthorizationListener(new  AuthorizationListener(){
 			public boolean isAuthorized(HandshakeData data){
@@ -44,11 +43,13 @@ public class App
 		final SocketIOServer socketIOServer = new SocketIOServer(configuration);
 		System.out.println("namespace"+Context.NameSpaceEnum.IM.toString());
 		socketIOServer.addNamespace(Context.NameSpaceEnum.IM.getNamespace());//绑定namespace
+		System.out.println("Configuration host"+host+" port"+port+" socketIOServer"+socketIOServer);
 		return socketIOServer;
 	}
 	
 	@Bean
 	public SpringAnnotationScanner springAnnotationScanner(SocketIOServer socketIOServer){
+		System.out.println("SpringAnnotationScanner ");
 		return new SpringAnnotationScanner(socketIOServer);
 	}
     public static void main( String[] args )
@@ -56,6 +57,7 @@ public class App
     	/**
     	 * 使用SpringApplication.run启动应用
     	 */
+    	System.out.println("main excute!");
         SpringApplication.run(App.class, args);
     }
 }
