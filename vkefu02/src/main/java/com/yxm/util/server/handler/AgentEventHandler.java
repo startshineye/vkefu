@@ -1,6 +1,7 @@
 package com.yxm.util.server.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
@@ -9,6 +10,7 @@ import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
 import com.yxm.util.server.message.ChatMessage;
 
+@Component
 public class AgentEventHandler {
 	private final SocketIOServer server;
 	

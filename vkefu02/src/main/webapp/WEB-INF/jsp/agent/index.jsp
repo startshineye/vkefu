@@ -50,11 +50,11 @@ body {
 </style>
 </head>
 <script type="text/javascript">
- var userId ="${userId}";
+ var agentId ="${userId}";
  var hostName="${hostName}";
  var port="${port}";
  var schema="${schema}";
- var userName = "${userName}";
+ var agentName = "${userName}";
  var sessionId="${sessionId}";
 </script>
 <script type="text/javascript" src="/js/agent/agent.js"></script>
