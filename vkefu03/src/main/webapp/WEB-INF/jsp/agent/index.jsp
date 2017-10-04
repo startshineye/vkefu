@@ -50,19 +50,19 @@ body {
 </style>
 </head>
 <script type="text/javascript">
- var agentId ="${userId}";
+ var agentId ="${agentId}";
+ var agentName = "${agentName}";
  var hostName="${hostName}";
  var port="${port}";
  var schema="${schema}";
- var agentName = "${userName}";
  var sessionId="${sessionId}";
 </script>
 <script type="text/javascript" src="/js/agent/agent.js"></script>
 <body>
-	 <h1>${userId}</h1>
+	 <h1>${agentId}</h1>
     <br />
 	<p>hostname:${hostName} port:${port} schema:${schema}</p>
-    <span>用户:${userName}登录  sessionId:${sessionId}</span>
+    <span>坐席:${agentName} 登录  sessionId:${sessionId}</span>
     <div id="console" class="well"></div>
     <form class="well form-inline" onsubmit="return false;">
        <!--  <input id="name" class="input-xlarge" type="text" placeholder="用户名称. . . " /> -->
