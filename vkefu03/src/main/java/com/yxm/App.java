@@ -9,6 +9,7 @@ import com.corundumstudio.socketio.HandshakeData;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 import com.yxm.core.Context;
+import com.yxm.util.exception.GlobalExceptionListener;
 /** 大家也许会看到有些demo使用了3个注解： @Configuration @EnableAutoConfiguration @ComponentScan
  * 其实：@SpringBootApplication申明让spring boot自动给程序进行必要的配置，等价于使用三个注解
  *@SpringBootApplication声明应用启动类
@@ -29,6 +30,7 @@ public class App
 		configuration.setHostname(host);
 		configuration.setPort(port);
 		configuration.setWorkerThreads(100);
+		configuration.setExceptionListener(new GlobalExceptionListener());
 		 //该处可以用来进行身份验证 
 		configuration.setAuthorizationListener(new  AuthorizationListener(){
 			public boolean isAuthorized(HandshakeData data){
