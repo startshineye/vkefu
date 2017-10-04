@@ -7,7 +7,7 @@
     });
     
     socket.on('message', function(data) {
-        output('<span class="username-msg">' + data.username + ' : </span>'
+        output('<span class="username-msg">' + data.name + ' : </span>'
                 + data.message);
     });
     
@@ -24,7 +24,7 @@
         var message = $('#msg').val();
         $('#msg').val('');
         socket.emit('message', {
-            username : userName,
+            name : agentName,
             message : message
         });
     };

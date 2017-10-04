@@ -19,7 +19,7 @@ public class AgentController {
 		String agentName = "Guest_"+agentId;
 		
 		ModelAndView model = new ModelAndView();
-		model.setViewName("user/index");
+		model.setViewName("agent/index");
 		model.addObject("sessionId",sessionId);
 		model.addObject("agentId",agentId);
 		model.addObject("agentName",agentName);
