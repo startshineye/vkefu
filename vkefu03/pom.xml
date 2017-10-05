@@ -127,6 +127,15 @@ spring boot 父节点依赖,引入这个之后相关的引入就不需要添加v
 		    <version>2.6</version>
 		</dependency>
 		
+		<!-- spring-boot mybatis依赖：  
+                            请不要使用1.0.0版本，因为还不支持拦截器插件，  
+        -->  
+    <dependency>  
+        <groupId>org.mybatis.spring.boot</groupId>  
+        <artifactId>mybatis-spring-boot-starter</artifactId>  
+        <version>1.3.0</version>  
+     </dependency> 
+		
   </dependencies>
 
 	<!-- 构建节点. -->

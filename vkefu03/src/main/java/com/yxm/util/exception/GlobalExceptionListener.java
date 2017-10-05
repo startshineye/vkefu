@@ -43,7 +43,6 @@ public class GlobalExceptionListener extends ExceptionListenerAdapter{
 			log.error(e.getMessage());
 		}
     }
-
     @Override
     public boolean exceptionCaught(ChannelHandlerContext ctx, Throwable e) throws Exception {
     	log.info("**exceptionCaught**");
