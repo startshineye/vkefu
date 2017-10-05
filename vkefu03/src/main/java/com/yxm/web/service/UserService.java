@@ -1,6 +1,7 @@
 package com.yxm.web.service;
 
-import com.founder.focuss.webcc.domain.UserGenerateVO;
+import com.yxm.web.domain.UserGenerateVO;
+
 public interface UserService {
   /**
    * 保存用户

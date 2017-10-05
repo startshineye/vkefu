@@ -1,10 +1,8 @@
-package com.founder.focuss.webcc.entity;
-
+package com.yxm.web.entity;
 import java.util.List;
 
-import com.founder.focuss.webcc.domain.BlackListVO;
-import com.founder.focuss.webcc.domain.ParamVO;
-
+import com.yxm.web.domain.BlackListVO;
+import com.yxm.web.domain.ParamVO;
 /**
  * 系统初始化bean
  * 

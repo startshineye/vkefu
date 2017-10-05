@@ -1,34 +1,27 @@
-package com.founder.focuss.webcc.service.impl;
-
+package com.yxm.web.service.impl;
 import java.text.ParseException;
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.founder.focuss.core.DataContext;
-import com.founder.focuss.utils.DateUtil;
-import com.founder.focuss.webcc.dao.OnlineAgentDao;
-import com.founder.focuss.webcc.entity.agent.Agent;
-import com.founder.focuss.webcc.service.OnlineAgentService;
-
+import com.yxm.core.DataContext;
+import com.yxm.util.DateUtil;
+import com.yxm.web.dao.OnlineAgentDao;
+import com.yxm.web.entity.agent.Agent;
+import com.yxm.web.service.OnlineAgentService;
 @Service("onlineAgentService")
 public class OnlineAgentServiceImpl implements OnlineAgentService{
 	@Autowired
     private OnlineAgentDao dao;
-	@Override
 	public void save(Agent agent) {
 		dao.insert(agent);
 	}
-	@Override
 	public void updateAgentByAgentId(Agent agent) {
 		dao.update(agent);
 	}
-	@Override
 	public Agent getByAgentId(String agentId) {
 		return dao.getByAgentId(agentId);
 	}
-	@Override
 	public boolean agentlogin(String agentId){
 		Agent agent = dao.getByAgentId(agentId);
 		if(agent==null){//说明坐席没有登录
@@ -56,7 +49,6 @@ public class OnlineAgentServiceImpl implements OnlineAgentService{
 			}
 		}
 	}
-	@Override
 	public void updateAgentStatusByAgentId(String status, String agentId) {
          dao.updateAgentStatusByAgentId(status,agentId);		
 	}

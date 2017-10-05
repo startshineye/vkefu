@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxm.web.dao.OnlineAgentDao">
+	   <insert id="insert">
+		insert into
+			fouss_im_onlineagent(ID,AGENTID,AGENTNAME,LOGINTIME,STATUS,LOGIN,GROUPS,SERUSERNUM,MAXUSERS,ENTID)
+		values(ONLINEAGENT_SEQ.Nextval,#{agentId},#{agentName},#{loginTime},#{status},#{login},#{groups},#{serUsernum},#{maxUsers},#{entId})
+		</insert>
+		<update id="update">
+		  update fouss_im_onlineagent 
+			<trim prefix="set" suffixOverrides=",">
+		      <if test="agentName!=null and agentName!=''">AGENTNAME=#{agentName},</if>
+			  <if test="loginTime!=null and loginTime!=''">LOGINTIME=#{loginTime},</if>
+			  <if test="status!=null and status!=''">STATUS=#{status},</if>
+			  <if test="login!=null and login!=''">LOGIN=#{login},</if>
+			  <if test="groups!=null and groups!=''">GROUPS=#{groups},</if>
+			  <if test="serUsernum!=null and serUsernum!=''">SERUSERNUM=#{serUsernum},</if>
+			  <if test="maxUsers!=null and maxUsers!=''">MAXUSERS=#{maxUsers},</if>
+			  <if test="entId!=null and entId!=''">ENTID=#{entId},</if>
+		    </trim>
+		where agentid=#{agentId}
+		</update>
+		
+	<select id="getByAgentId" resultType="com.yxm.web.entity.agent.Agent">
+	   select * from fouss_im_onlineagent where agentid = #{0}
+	</select>
+	
+	<select id="getLoginTimeByAgentId" resultType="java.lang.String">
+	  select logintime from fouss_im_onlineagent  where agentid = #{0}
+	</select>
+	
+	<select id="getAgentLoginByAgentId" resultType="java.lang.String">
+	  select login from fouss_im_onlineagent  where agentid = #{0}
+	</select>
+	
+	<update id="updateAgentStatusByAgentId">
+	  update fouss_im_onlineagent set status = #{0} where agentid = #{1}
+	</update>
+</mapper>

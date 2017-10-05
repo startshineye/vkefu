@@ -1,11 +1,9 @@
-package com.founder.focuss.webcc.service;
-
+package com.yxm.web.service;
 import javax.servlet.http.HttpServletRequest;
 
-import com.founder.focuss.webcc.domain.ChatRecordVO;
-import com.founder.focuss.webcc.domain.MessageVO;
-import com.founder.focuss.webcc.domain.UncheckedMessageVO;
-
+import com.yxm.web.domain.ChatRecordVO;
+import com.yxm.web.domain.MessageVO;
+import com.yxm.web.domain.UncheckedMessageVO;
 public interface ChatRecordService {
 	/**
 	 * 根据userid获取聊天记录

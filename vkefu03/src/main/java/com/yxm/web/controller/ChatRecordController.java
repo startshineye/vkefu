@@ -1,5 +1,4 @@
-package com.founder.focuss.webcc.controller;
-
+package com.yxm.web.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,33 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
-
-import com.founder.focuss.core.DataContext;
-import com.founder.focuss.utils.DateUtil;
-import com.founder.focuss.utils.factory.ACDFactory;
-import com.founder.focuss.webcc.domain.AgentOptLogVO;
-import com.founder.focuss.webcc.domain.AgentUserVO;
-import com.founder.focuss.webcc.domain.MessageVO;
-import com.founder.focuss.webcc.domain.PaginationVO;
-import com.founder.focuss.webcc.domain.ParamVO;
-import com.founder.focuss.webcc.domain.SatisfactionMessageVO;
-import com.founder.focuss.webcc.domain.SatisfactionVO;
-import com.founder.focuss.webcc.domain.ThreadVO;
-import com.founder.focuss.webcc.domain.UncheckedMessageVO;
-import com.founder.focuss.webcc.domain.UserOptLogVO;
-import com.founder.focuss.webcc.entity.api.Satisfaction;
-import com.founder.focuss.webcc.service.AgentOptLogService;
-import com.founder.focuss.webcc.service.AgentUserService;
-import com.founder.focuss.webcc.service.ChatRecordService;
-import com.founder.focuss.webcc.service.MessageService;
-import com.founder.focuss.webcc.service.ParamService;
-import com.founder.focuss.webcc.service.SatisfactionService;
-import com.founder.focuss.webcc.service.ThreadService;
-import com.founder.focuss.webcc.service.UserOptLogService;
-import com.founder.focuss.webcc.websocket.SystemWebSocketHandler;
-
 /**
  * 聊天记录controller
  * 

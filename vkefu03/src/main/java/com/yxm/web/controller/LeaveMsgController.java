@@ -1,5 +1,4 @@
-package com.founder.focuss.webcc.controller;
-
+package com.yxm.web.controller;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,11 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.founder.focuss.utils.DateUtil;
-import com.founder.focuss.webcc.domain.LeaveMsgVO;
-import com.founder.focuss.webcc.domain.UserOptLogVO;
-import com.founder.focuss.webcc.service.LeaveMsgService;
-import com.founder.focuss.webcc.service.UserOptLogService;
+import com.yxm.util.DateUtil;
+import com.yxm.web.domain.LeaveMsgVO;
+import com.yxm.web.domain.UserOptLogVO;
+import com.yxm.web.service.LeaveMsgService;
+import com.yxm.web.service.UserOptLogService;
 /**
  * 留言消息controller
  * @author yxm
@@ -24,13 +23,10 @@ import com.founder.focuss.webcc.service.UserOptLogService;
 @Controller
 @RequestMapping("/leavemsg")
 public class LeaveMsgController {
-	
 	@Autowired
     private LeaveMsgService leaveMsgService;
-	
 	@Autowired
 	private UserOptLogService userOptService;
-	
 	@RequestMapping("/index")
 	public String index(){
 		return "leaveword/leave";

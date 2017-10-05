@@ -1,4 +1,5 @@
-package com.founder.focuss.webcc.entity.api;
+package com.yxm.web.entity.api;
+
 
 import com.google.gson.Gson;
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxm.web.dao.AgentOptLogDao">
+ <insert id="save">
+   insert into FOUSS_IM_AGENTOPTLOG(ID,THREADID,AGENTID,AGENTNAME,USERID,USERNAME,ENTID,QUEUEID,OPTCODE,OPTRESULT,TOUSERID,TOAGENTID,STARTTIME,LOGTIME,REMARK) values(AGENTOPTLOG_SEQ.Nextval,#{threadId},#{agentId},#{agentName},#{userId},#{userName},#{entId},#{queueId},#{optCode},#{optResult},#{toUserId},#{toAgentId},#{startTime},#{logTime},#{remark})
+  </insert>
+  
+  <select id="getAgentOptLogListByLastAgentOptId" resultType="com.yxm.web.domain.AgentOptLogVO">
+    select * from fouss_im_agentoptlog t where t.optresult = 1 and t.id &gt; #{0} and t.optresult = 1 order by t.starttime asc
+  </select>
+</mapper>

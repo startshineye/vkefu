@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yxm.web.dao.SatisfactionDao">
+	<insert id="save">
+	 insert into 
+	     fouss_im_satisfaction(SATISFACTIONID,THREADID,SESSIONID,USERID,AGENTID,STARTTIME,SATISFACTION)
+	values(SATISFACTION_SEQ.Nextval,#{threadId},#{sessionId},#{userId},#{agentId},#{startTime},#{satisfaction})
+	</insert>
+	
+	<select id="getSatisfactionByThreadIdAndAgentId" resultType="com.yxm.web.domain.SatisfactionVO">
+	   select * from fouss_im_satisfaction where threadid=#{0} and agentid=#{1}
+	</select>
+</mapper>
+
+
+
+

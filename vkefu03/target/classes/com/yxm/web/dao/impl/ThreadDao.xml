@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yxm.web.dao.ThreadDao">
+    <!--new-->
+	<insert id="save">
+	 <selectKey resultType="INTEGER" order="BEFORE" keyProperty="threadId">
+	     SELECT THREAD_SEQ.NEXTVAL as threadId from DUAL
+	 </selectKey>
+	 insert into 
+	     fouss_im_thread(THREADID,AGENTUSERID,SESSIONID,SOURCE,USERID,USERNAME,AGENTID,AGENTNAME,ENTID,STARTTIME,RESPONSETIME,ENDTIME,STATUS,STARTCAUSE,ENDCAUSE)
+	values(#{threadId},#{agentUserId},#{sessionId},#{source},#{userId},#{userName},#{agentId},#{agentName},#{entId},#{startTime},#{responseTime},#{endTime},#{status},#{startCause},#{endCause}) 
+	</insert>
+	<!-- OK -->
+	<update id="update">
+	   update 
+	        fouss_im_thread 
+	   set 
+	        SESSIONID = #{sessionId}
+	   where 
+	        THREADID = #{threadId}
+	</update>
+	
+ 
+	<update id="updateStatusBySessionIdAndAgentId">
+	    update 
+	         fouss_im_thread 
+	   set
+	         STATUS = #{0}
+	   where
+	         SESSIONID = #{1} and AGENTID = #{2}
+	</update>
+	
+	<update id="updateStatusBySessionIdAndUserId">
+	    update 
+	         fouss_im_thread 
+	   set
+	         STATUS = #{0}
+	   where
+	         SESSIONID = #{1} and USERID = #{2}
+	</update>
+	
+	<update id="updateStatusByThreadId">
+	   update
+	        fouss_im_thread
+	   set
+	       STATUS = #{1}
+	   where
+	       THREADID = #{0}
+	</update>
+	
+	
+	<update id="updateById">
+	   update
+	      fouss_im_thread
+	   set
+	      SATISFACTION = #{0}
+	   where
+	      USERID = #{1} and AGENTID = #{2}
+	</update>
+	
+	<update id="updateStatisfactionBySessionIdAndAgentId">
+	   update
+	      fouss_im_thread
+	   set
+	      SATISFACTION = #{0}
+	   where
+	      SESSIONID = #{1} and AGENTID = #{2}
+	</update>
+	
+	<!--new -->
+	<update id="agentEndByEndStatusAndUserIdAndAgentId">
+	   update
+	      FOUSS_IM_THREAD
+	   set
+	      STATUS = #{0},RESPONSETIME=#{1},ENDCAUSE=#{2},EndTime=#{3}
+	   where
+	      USERID=#{4} and AGENTID=#{5} and status not in(2)
+	</update>
+	
+	<!-- new  -->
+	<update id="updateStatusByEndStatusAndAgentUserId">
+	   update
+	      fouss_im_thread
+	   set
+	      STATUS = #{0}
+	   where
+	      status not in (2) and agentuserid = #{1}
+	</update>
+	
+	<!-- new -->
+	<update id="updateLastStatusByUserIdAndAgentId">
+	update
+	      fouss_im_thread
+	   set
+	      STATUS = #{0}
+	   where
+	      userid=#{1} and agentid = #{2} and threadid=(select max(threadid) from fouss_im_thread t where agentid=#{2} and userid =#{1})
+	
+	</update>
+	
+	<!-- new -->
+	<update id="updateLastStatusByAgentUserId">
+	   update
+	       fouss_im_thread
+	   set
+	       STATUS = #{0}
+	    where
+	       agentuserid = #{1} and threadid =(select max(threadid) from fouss_im_thread where agentuserid=#{1})
+	</update>
+	
+	
+	<select id="getThreadIdListByAgentId" resultType="java.lang.Integer">
+	    select THREADID from fouss_im_thread where AGENTID = #{0}
+	</select>
+	
+	<select id="getThreadIdListByUserId" resultType="java.lang.Integer">
+	    select THREADID from fouss_im_thread where USERID = #{0}
+	</select>
+	
+	<select id="getStatusByAgentIdAndSessionId" resultType="java.lang.Integer">
+	   select STATUS from FOUSS_IM_THREAD where agentid = #{0} and sessionid=#{1}
+	</select>
+	
+	
+	<select id="getById" resultType="threadVO">
+		select * from fouss_im_thread where USERID =#{userId} and CREATETIME=(select max(CREATETIME) from fouss_im_thread where USERID =#{userId})
+	</select>
+	
+	<select id="getLastThreadByAgentIdAndUserId" resultType="threadVO">
+	   select * from(select * from fouss_im_thread where USERID = #{1} and agentid =#{0} order by sessionid desc) where rownum=1
+	</select>
+	
+	<select id="getLastById" resultType="threadVO">
+	  select * from(select * from fouss_im_thread where USERID = #{0} order by createtime desc) where rownum =1
+	</select>
+	
+	
+	<select id="getThreadListByUserId" resultType="threadVO">
+	    select * from fouss_im_thread where USERID = #{0}
+	</select>
+	
+	<select id="getThreadListByEndStatusAndAgentId" resultType="threadVO">
+	    select * from fouss_im_thread where AGENTID = #{0} and status not in(2)
+	</select>
+	
+	<select id="getAll" resultType="com.yxm.web.domain.ThreadVO">
+	   select * from fouss_im_thread order by CREATETIME
+	</select>
+	
+	<select id="getGroupThreadBySource" resultType="com.yxm.web.domain.ThreadVO">
+	   SELECT a.*
+           FROM fouss_im_thread a
+        INNER JOIN 
+      (SELECT agentid,
+        MIN(threadid) as threadid
+     FROM fouss_im_thread where status in(0,1) and source=#{0}
+    GROUP BY agentid 
+      ) b
+    ON a.agentid = b.agentid 
+  AND a.threadid = b.threadid
+	</select>
+	
+	<select id="getSessionIdByEndStatusAndAgentId" resultType="java.lang.Integer">
+	    select distinct sessionid from fouss_im_thread where status not in (2) and agentid = #{0}
+	</select>
+	 
+	 	
+	<!-- OK -->
+	<select id="getThreadListByEndStatusAndUserId" resultType="com.yxm.web.domain.ThreadVO">
+	    select * from fouss_im_thread  where userid = #{0} and status not in (2)
+	</select>
+	
+   <!-- OK -->
+	<select id="getSessionIdByEndStatusAndUserId" resultType="java.lang.Integer">
+	    select distinct sessionid from fouss_im_thread where status not in (2) and userid = #{0}
+	</select>
+	<!-- new -->
+	<select id="getThreadIdByEndStatusAndAgentUserId" resultType="java.lang.Integer">
+	   select threadid from fouss_im_thread where status not in (2) and agentuserid = #{0}
+	</select>
+	
+	<!-- new  -->
+	<select id="getThreadByEndStatusAndAgentUserId" resultType="com.yxm.web.domain.ThreadVO">
+	  select * from fouss_im_thread where status not in (2) and agentuserid=#{0}
+	</select>
+	
+	<!-- new  -->
+	<select id="getThreadByEndStatusAndUserIdAndAgentId" resultType="com.yxm.web.domain.ThreadVO">
+	  select * from fouss_im_thread where status not in (2) and userid=#{0} and agentid=#{1}
+	</select>
+</mapper>
+
+
+
+

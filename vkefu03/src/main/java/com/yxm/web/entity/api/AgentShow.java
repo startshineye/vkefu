@@ -1,9 +1,4 @@
-package com.founder.focuss.webcc.entity.api;
-
-import org.springframework.web.socket.WebSocketSession;
-
-import com.google.gson.Gson;
-
+package com.yxm.web.entity.api;
 /**
  * 坐席(model)
  * @author yxm

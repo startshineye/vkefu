@@ -1,6 +1,6 @@
-package com.founder.focuss.webcc.service;
+package com.yxm.web.service;
 
-import com.founder.focuss.webcc.domain.UserOptLogVO;
+import com.yxm.web.domain.UserOptLogVO;
 
 public interface UserOptLogService {
    boolean save(UserOptLogVO userOptLogVO);

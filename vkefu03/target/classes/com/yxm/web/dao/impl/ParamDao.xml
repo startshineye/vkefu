@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yxm.web.dao.ParamDao">
+     <!-- 排队提示语 -->
+	 <select id="getUserQueueRemindByAgentId" resultType="com.yxm.web.domain.ParamVO">
+	    select * from FOUSS_IM_PARAM where description = #{0} and role = #{1} and agentid = #{2}
+	 </select>
+	 
+	 <select id="getUserQueueRemindByAdmin" resultType="com.yxm.web.domain.ParamVO">
+	      select * from FOUSS_IM_PARAM where description = #{0} and role = #{1}
+	 </select>
+	 
+	<!-- 黑名单 -->
+	<select id="getBalcklistRemindByAdmin" resultType="com.yxm.web.domain.ParamVO">
+	    select * from FOUSS_IM_PARAM where description = #{0} and role = #{1}
+	</select>
+	
+	<!-- 用户排队超时提示语 -->
+     <select id="getUserQueueTimeoutRemindByAdmin" resultType="com.yxm.web.domain.ParamVO">
+         select * from FOUSS_IM_PARAM where description = #{0} and role = #{1}
+     </select>
+     
+     <!-- 最大用户接入量 -->
+     <select id="getMaxUserByAgentId" resultType="com.yxm.web.domain.ParamVO">
+        select * from FOUSS_IM_PARAM where description = #{0} and role = #{1} and agentid = #{2}
+     </select>
+     
+     <select id="getMaxUserByAdmin" resultType="com.yxm.web.domain.ParamVO">
+        select * from FOUSS_IM_PARAM where description = #{0} and role = #{1}
+     </select>
+     
+     <!-- 欢迎词 -->
+     <select id="getWelcomeByAgentId" resultType="com.yxm.web.domain.ParamVO">
+         select * from FOUSS_IM_PARAM where description = #{0} and role = #{1} and agentid = #{2}
+     </select>
+     
+    <select id="getWelcomeByAdmin" resultType="com.yxm.web.domain.ParamVO">
+         select * from FOUSS_IM_PARAM where description = #{0} and role = #{1}
+    </select>
+     
+     <!-- 用户排队时间 -->
+     <select id="getUserWaitingTimeByAdmin" resultType="com.yxm.web.domain.ParamVO">
+          select * from FOUSS_IM_PARAM where description = #{0} and role = #{1}
+     </select>
+     
+     <!-- 链接 -->
+     <select id="getLinkByAdmin" resultType="com.yxm.web.domain.ParamVO">
+          select * from FOUSS_IM_PARAM where description = #{0} and role = #{1}
+     </select>
+     
+     <!-- 满意度 -->
+     <select id="getSatisfactionByAgentId"  resultType="com.yxm.web.domain.ParamVO">
+          select * from FOUSS_IM_PARAM where description = #{0} and role = #{1} and agentid = #{2}
+     </select>
+     
+     <select id="getSatisfactionByAdmin" resultType="com.yxm.web.domain.ParamVO">
+          select * from FOUSS_IM_PARAM where description = #{0} and role = #{1}
+     </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

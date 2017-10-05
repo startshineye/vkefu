@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxm.web.dao.UserOptQueueDao">
+ <insert id="save">
+ 		insert into fouss_im_useropt_queue(id,userid,username,queueintime,queueid,status) 
+ 		values(#{id},#{userId},#{userName},#{queueinTime},#{queueId},#{status})
+  </insert>
+  
+  <update id="updateUserOptQueueById">
+     update fouss_im_useropt_queue t 
+       set  queueoutcause = #{0}, queueouttime = #{1}, status = 1 where t.id =#{2}
+  </update>
+  
+  <delete id="delAll">
+       delete from fouss_im_useropt_queue
+  </delete>
+</mapper>

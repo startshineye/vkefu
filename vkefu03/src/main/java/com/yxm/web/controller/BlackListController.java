@@ -1,5 +1,4 @@
-package com.founder.focuss.webcc.controller;
-
+package com.yxm.web.controller;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,19 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.founder.focuss.utils.DateUtil;
-import com.founder.focuss.utils.factory.ACDFactory;
-import com.founder.focuss.webcc.dao.AgentOptLogDao;
-import com.founder.focuss.webcc.domain.AgentOptLogVO;
-import com.founder.focuss.webcc.domain.BlackListVO;
-import com.founder.focuss.webcc.entity.agent.Agent;
-import com.founder.focuss.webcc.entity.user.User;
-import com.founder.focuss.webcc.service.BlackListService;
-import com.founder.focuss.webcc.service.OnlineAgentService;
-import com.founder.focuss.webcc.service.OnlineUserService;
-import com.founder.focuss.webcc.service.WebSocketService;
-import com.founder.focuss.webcc.service.impl.OnlineUserServiceImpl;
-
+import com.yxm.util.DateUtil;
+import com.yxm.util.factory.ACDFactory;
+import com.yxm.web.dao.AgentOptLogDao;
+import com.yxm.web.entity.user.User;
+import com.yxm.web.service.BlackListService;
+import com.yxm.web.service.OnlineAgentService;
+import com.yxm.web.service.OnlineUserService;
 /**
  * 黑名单controller
  * @author yxm
@@ -55,7 +48,8 @@ public class BlackListController {
       String userId = request.getParameter("userId");
 	  String userType = request.getParameter("userType");
 	  String time = DateUtil.datetimeFormat.format(new Date());
-	  User user = ACDFactory.createUserManager().getUser(userId);
+	 /* User user = ACDFactory.createUserManager().getUser(userId);*/
+	  User user = new User();
 	  if(user==null){
 		  user = onlineUserService.getByUserId(userId);
 		  ACDFactory.createUserManager().addUser(user);

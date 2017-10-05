@@ -1,4 +1,4 @@
-package com.founder.focuss.webcc.controller;
+package com.yxm.web.controller;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -28,24 +28,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 
-import sun.misc.BASE64Decoder;
-
-import com.founder.focuss.core.DataContext;
-import com.founder.focuss.utils.DateUtil;
-import com.founder.focuss.utils.factory.ACDFactory;
-import com.founder.focuss.webcc.domain.AgentUserVO;
-import com.founder.focuss.webcc.domain.MessageVO;
-import com.founder.focuss.webcc.domain.ThreadVO;
-import com.founder.focuss.webcc.entity.agent.Agent;
-import com.founder.focuss.webcc.service.AgentUserService;
-import com.founder.focuss.webcc.service.MessageService;
-import com.founder.focuss.webcc.service.OnlineAgentService;
-import com.founder.focuss.webcc.service.ThreadService;
-import com.founder.focuss.webcc.service.WebSocketService;
-import com.founder.focuss.webcc.websocket.SystemWebSocketHandler;
+import com.yxm.util.DateUtil;
+import com.yxm.util.factory.ACDFactory;
+import com.yxm.web.entity.agent.Agent;
+import com.yxm.web.service.AgentUserService;
+import com.yxm.web.service.MessageService;
+import com.yxm.web.service.OnlineAgentService;
+import com.yxm.web.service.ThreadService;
+import com.yxm.web.service.WebSocketService;
 /**
  * 文件上传类
  * 
@@ -70,8 +61,8 @@ public class FileController {
 	private AgentUserService agentUserService;
 	@Autowired
 	private WebSocketService webSocketService;
-	@Autowired
-	private SystemWebSocketHandler webSocketHandler;
+	/*@Autowired
+	private SystemWebSocketHandler webSocketHandler;*/
 	private static final Logger logger;
 	private static final Map<String, String> TypeMap = new HashMap<String, String>();
 	// 设置允许上传呢的类型

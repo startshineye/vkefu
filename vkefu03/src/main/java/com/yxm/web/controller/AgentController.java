@@ -1,52 +1,26 @@
-package com.founder.focuss.webcc.controller;
+package com.yxm.web.controller;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import net.sf.json.JSONObject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 
-import com.founder.focuss.core.DataContext;
-import com.founder.focuss.utils.DateUtil;
-import com.founder.focuss.utils.JwtUtil;
-import com.founder.focuss.utils.WebSocketSessionUtil;
-import com.founder.focuss.utils.factory.ACDFactory;
-import com.founder.focuss.webcc.domain.AgentOptLogVO;
-import com.founder.focuss.webcc.domain.AgentUserVO;
-import com.founder.focuss.webcc.domain.ParamVO;
-import com.founder.focuss.webcc.domain.ThreadVO;
-import com.founder.focuss.webcc.entity.Person;
-import com.founder.focuss.webcc.entity.agent.Agent;
-import com.founder.focuss.webcc.entity.api.AgentEnd;
-import com.founder.focuss.webcc.entity.api.AgentGroupChatConfirm;
-import com.founder.focuss.webcc.entity.api.AgentLogoff;
-import com.founder.focuss.webcc.entity.api.AgentTransferServiceConfirm;
-import com.founder.focuss.webcc.entity.api.MessageTip;
-import com.founder.focuss.webcc.entity.user.User;
-import com.founder.focuss.webcc.service.AgentOptLogService;
-import com.founder.focuss.webcc.service.AgentService;
-import com.founder.focuss.webcc.service.AgentUserService;
-import com.founder.focuss.webcc.service.DictService;
-import com.founder.focuss.webcc.service.MessageService;
-import com.founder.focuss.webcc.service.OnlineAgentService;
-import com.founder.focuss.webcc.service.OnlineUserService;
-import com.founder.focuss.webcc.service.ParamService;
-import com.founder.focuss.webcc.service.ThreadService;
-import com.founder.focuss.webcc.service.WebSocketService;
-import com.founder.focuss.webcc.websocket.SystemWebSocketHandler;
-
+import com.yxm.web.service.AgentOptLogService;
+import com.yxm.web.service.AgentService;
+import com.yxm.web.service.AgentUserService;
+import com.yxm.web.service.MessageService;
+import com.yxm.web.service.OnlineAgentService;
+import com.yxm.web.service.OnlineUserService;
+import com.yxm.web.service.ParamService;
+import com.yxm.web.service.ThreadService;
+import com.yxm.web.service.WebSocketService;
 @Controller
 @RequestMapping("agent")
 public class AgentController{
@@ -65,11 +39,7 @@ public class AgentController{
 	@Autowired
 	private MessageService messageService;
 	
-	@Autowired
-	private SystemWebSocketHandler webSocketHandler;
-	
-	@Autowired
-	private DictService dictService;
+	/*private SystemWebSocketHandler webSocketHandler;*/
 	
 	@Autowired
 	private ParamService paramService;

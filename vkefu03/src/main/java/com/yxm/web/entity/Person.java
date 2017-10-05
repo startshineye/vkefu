@@ -1,4 +1,4 @@
-package com.founder.focuss.webcc.entity;
+package com.yxm.web.entity;
 /**
  * 用户实体类(此用户包括坐席和用户)
  * @author yxm

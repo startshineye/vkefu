@@ -1,5 +1,4 @@
-package com.founder.focuss.webcc.entity.api;
-
+package com.yxm.web.entity.api;
 public class BaseAPI {
 	private String cmd;
 	private String desc;

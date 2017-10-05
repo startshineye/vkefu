@@ -1,25 +1,20 @@
-package com.founder.focuss.webcc.service.impl;
-
+package com.yxm.web.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.founder.focuss.webcc.dao.SatisfactionDao;
-import com.founder.focuss.webcc.domain.SatisfactionVO;
-import com.founder.focuss.webcc.service.SatisfactionService;
-
-
+import com.yxm.web.dao.SatisfactionDao;
+import com.yxm.web.domain.SatisfactionVO;
+import com.yxm.web.service.SatisfactionService;
 @Service("satisfactionService")
 public class SatisfactionServiceImpl implements SatisfactionService{
 	
 	@Autowired
 	private SatisfactionDao  satisfactionDao;
 	
-	@Override
 	public void save(SatisfactionVO satisfaction) {
 		satisfactionDao.save(satisfaction);
 	}
 
-	@Override
 	public SatisfactionVO getSatisfactionByThreadIdAndAgentId(Integer threadId,
 			String agentId) {
 		return satisfactionDao.getSatisfactionByThreadIdAndAgentId(threadId,agentId);

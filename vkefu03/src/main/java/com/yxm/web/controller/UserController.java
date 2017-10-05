@@ -1,34 +1,20 @@
-package com.founder.focuss.webcc.controller;
-
+package com.yxm.web.controller;
 import java.util.Date;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.founder.focuss.core.DataContext;
-import com.founder.focuss.utils.DateUtil;
-import com.founder.focuss.utils.factory.ACDFactory;
-import com.founder.focuss.utils.ip.IPTools;
-import com.founder.focuss.webcc.domain.BlackListVO;
-import com.founder.focuss.webcc.domain.ParamVO;
-import com.founder.focuss.webcc.domain.UserGenerateVO;
-import com.founder.focuss.webcc.domain.UserOptLogVO;
-import com.founder.focuss.webcc.entity.Person;
-import com.founder.focuss.webcc.entity.user.User;
-import com.founder.focuss.webcc.service.BlackListService;
-import com.founder.focuss.webcc.service.OnlineUserService;
-import com.founder.focuss.webcc.service.ParamService;
-import com.founder.focuss.webcc.service.UserOptLogService;
-import com.founder.focuss.webcc.service.UserService;
-import com.founder.focuss.webcc.service.WebSocketService;
-
+import com.yxm.web.service.BlackListService;
+import com.yxm.web.service.OnlineUserService;
+import com.yxm.web.service.ParamService;
+import com.yxm.web.service.UserOptLogService;
+import com.yxm.web.service.UserService;
+import com.yxm.web.service.WebSocketService;
 /**
  * 坐席所对应的控制器
  * 

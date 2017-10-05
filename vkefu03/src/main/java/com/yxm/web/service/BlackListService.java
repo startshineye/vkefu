@@ -1,7 +1,5 @@
-package com.founder.focuss.webcc.service;
-
-import com.founder.focuss.webcc.domain.BlackListVO;
-
+package com.yxm.web.service;
+import com.yxm.web.domain.BlackListVO;
 /**
  * 黑名单service接口
  * @author yxm

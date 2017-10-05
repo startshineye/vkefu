@@ -1,9 +1,7 @@
-package com.founder.focuss.webcc.service;
-
+package com.yxm.web.service;
 import java.util.List;
-
-import com.founder.focuss.webcc.domain.MessageVO;
-import com.founder.focuss.webcc.domain.PaginationVO;
+import com.yxm.web.domain.MessageVO;
+import com.yxm.web.domain.PaginationVO;
 public interface MessageService {
 	/**
 	 * 保存消息

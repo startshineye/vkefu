@@ -1,21 +1,18 @@
-package com.founder.focuss.webcc.service.impl;
-
+package com.yxm.web.service.impl;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.founder.focuss.webcc.domain.ChatRecordVO;
-import com.founder.focuss.webcc.domain.MessageVO;
-import com.founder.focuss.webcc.domain.ThreadVO;
-import com.founder.focuss.webcc.domain.UncheckedMessageVO;
-import com.founder.focuss.webcc.service.ChatRecordService;
-import com.founder.focuss.webcc.service.MessageService;
-import com.founder.focuss.webcc.service.ThreadService;
 
+import com.yxm.web.domain.ChatRecordVO;
+import com.yxm.web.domain.MessageVO;
+import com.yxm.web.domain.ThreadVO;
+import com.yxm.web.domain.UncheckedMessageVO;
+import com.yxm.web.service.ChatRecordService;
+import com.yxm.web.service.MessageService;
+import com.yxm.web.service.ThreadService;
 @Service("chatRecordService")
 public class ChatRecordServiceImpl implements ChatRecordService {
 	@Autowired
@@ -30,7 +27,6 @@ public class ChatRecordServiceImpl implements ChatRecordService {
 		logger = Logger.getLogger(ChatRecordServiceImpl.class);
 	}
 
-	@Override
 	public ChatRecordVO<MessageVO> getRecordById(HttpServletRequest request,Integer pageNo, Integer pageSize) {
 		try {
 			List<MessageVO> dataList = new ArrayList<MessageVO>();
@@ -65,7 +61,6 @@ public class ChatRecordServiceImpl implements ChatRecordService {
 		}
 	}
 
-	@Override
 	public UncheckedMessageVO<MessageVO> getUncheckedMessage(String userId,
 			Integer lastmsgid) {
 		try {

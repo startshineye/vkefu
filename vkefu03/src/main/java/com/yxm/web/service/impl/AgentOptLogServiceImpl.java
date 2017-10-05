@@ -1,25 +1,20 @@
-package com.founder.focuss.webcc.service.impl;
-
+package com.yxm.web.service.impl;
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.founder.focuss.utils.DateUtil;
-import com.founder.focuss.webcc.dao.AgentOptLogDao;
-import com.founder.focuss.webcc.domain.AgentOptLogVO;
-import com.founder.focuss.webcc.service.AgentOptLogService;
-
+import com.yxm.util.DateUtil;
+import com.yxm.web.dao.AgentOptLogDao;
+import com.yxm.web.domain.AgentOptLogVO;
+import com.yxm.web.service.AgentOptLogService;
 @Service("agentOptLogService")
 public class AgentOptLogServiceImpl implements AgentOptLogService {
 	@Autowired
 	private AgentOptLogDao agentOptLogDao;
-	@Override
+	 
 	public void save(AgentOptLogVO agentOptLogVO) {
 		agentOptLogDao.save(agentOptLogVO);
 	}
-	
-	  @Override
 	  public void agentOptLog(String agentId,String agentName,Integer entId,Integer optCode,Integer optResult,String queueId,String remark,Integer threadId,String toAgentId,String toUserId,String userId,String userName){
 		 try {
 			 String time = DateUtil.datetimeFormat.format(new Date());

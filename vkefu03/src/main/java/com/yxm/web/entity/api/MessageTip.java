@@ -1,4 +1,4 @@
-package com.founder.focuss.webcc.entity.api;
+package com.yxm.web.entity.api;
 import com.google.gson.Gson;
 /****
  * 消息提示类:该类提示坐席用户已经发起连接

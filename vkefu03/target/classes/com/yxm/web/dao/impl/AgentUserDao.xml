@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yxm.web.dao.AgentUserDao">
+    <!--OK-->
+	<insert id="saveAutoSessionId">
+	 <selectKey resultType="INTEGER" order="BEFORE" keyProperty="agentUserId">
+	     SELECT AGENTUSER_SEQ.NEXTVAL as agentUserId from DUAL
+	 </selectKey>
+	 insert into 
+	     fouss_im_agentuser(AGENTUSERID,SESSIONID,SOURCE,USERID,USERNAME,AGENTID,AGENTNAME,ENTID,STATUS,CHATTYPE)
+	values(#{agentUserId},#{agentUserId},#{source},#{userId},#{userName},#{agentId},#{agentName},#{entId},#{status},#{chatType})
+	</insert>
+	
+	<insert id="saveUnAutoSessionId">
+	  <selectKey resultType="INTEGER" order="BEFORE" keyProperty="agentUserId">
+	     SELECT AGENTUSER_SEQ.NEXTVAL as agentUserId from DUAL
+	 </selectKey>
+	 insert into 
+	     fouss_im_agentuser(AGENTUSERID,SESSIONID,SOURCE,USERID,USERNAME,AGENTID,AGENTNAME,ENTID,STATUS,CHATTYPE)
+	  values(#{agentUserId},#{sessionId},#{source},#{userId},#{userName},#{agentId},#{agentName},#{entId},#{status},#{chatType})
+	</insert>
+	<select id="getAgentUserByUserIdAndAgentId" resultType="com.yxm.web.domain.AgentUserVO">
+	   select * from fouss_im_agentuser where USERID = #{0} and AGENTID = #{1}
+	</select>
+	
+	<select id="getAgentUserListByEndStatusAndChatTypeAndUserId" resultType="com.yxm.web.domain.AgentUserVO">
+	   select * from fouss_im_agentuser where status not in (#{0}) and chattype not in (#{1}) and userid=#{2}
+	</select>
+	
+	<select id="getAgentUserListByEndStatusAndChatTypeAndAgentId" resultType="com.yxm.web.domain.AgentUserVO">
+	   select * from fouss_im_agentuser where status not in (#{0}) and chattype not in (#{1}) and agentid=#{2}
+	</select>
+	
+	<select id="getAgentUserListByEndStatusAndAgentId" resultType="com.yxm.web.domain.AgentUserVO">
+	 select * from fouss_im_agentuser where status not in (2) and AGENTID=#{0}
+	</select>
+	
+	<select id="getAgentUserListByEndStatusAndUserId" resultType="com.yxm.web.domain.AgentUserVO">
+	 select * from fouss_im_agentuser where status not in (2) and USERID=#{0}
+	</select>
+	
+	<select id="getAgentUserBySessionIdAndAgentId" resultType="com.yxm.web.domain.AgentUserVO">
+	 select * from fouss_im_agentuser where SESSIONID = #{0} and AGENTID=#{1}
+	</select>
+	
+	<select id="getTotalByUserId" resultType="java.lang.Long">
+	   select count(*) from fouss_im_agentuser where USERID = #{0}
+	</select>
+	
+	<!-- OK -->
+	<select id="getAgentUserListByPage" resultType="com.yxm.web.domain.AgentUserVO">
+	      select 
+			tt.*
+		from
+			(select 
+				t.*,rownum linenum
+			from
+				(select * from fouss_im_agentuser where USERID =#{2} order by AGENTUSERID)t
+			where
+			rownum &lt;= #{0}*#{1}) tt
+		where 
+			linenum &gt;(#{0}-1)*#{1}
+	</select>
+	
+	<select id="getSernumByEndStatusAndAgentId" resultType="java.lang.Integer">
+	    select count(*) from fouss_im_agentuser where status not in (2) and agentid = #{0}
+	</select>
+	
+	<update id="updateStatusAndChatTypeByAgentId">
+	   update fouss_im_agentuser set status = #{0},chattype=#{1} where agentid = #{2}
+	</update>
+	
+	<update id="updateStatusAndChatTypeByUserIdAndAgentId">
+	   update fouss_im_agentuser set status = #{0},chattype=#{1} where userid=#{2} and agentid = #{3}
+	</update>
+</mapper>
+
+
+
+

@@ -1,4 +1,4 @@
-package com.founder.focuss.webcc.service;
+package com.yxm.web.service;
 /**
  * 系统初始化service
  * @author yxm

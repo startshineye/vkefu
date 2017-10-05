@@ -10,7 +10,7 @@ import com.yxm.util.Tools;
 
 @Controller
 @RequestMapping("/agent")
-public class AgentController {
+public class Agent1Controller {
 	
    @RequestMapping("/index")
    public ModelAndView index(HttpServletRequest request){

@@ -1,45 +1,7 @@
-package com.founder.focuss.webcc.service.impl;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.yxm.web.service.impl;
 import org.springframework.stereotype.Service;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 
-import com.founder.focuss.core.DataContext;
-import com.founder.focuss.utils.DateUtil;
-import com.founder.focuss.utils.factory.ACDFactory;
-import com.founder.focuss.webcc.dao.AgentOptLogDao;
-import com.founder.focuss.webcc.dao.AgentUserDao;
-import com.founder.focuss.webcc.dao.MessageDao;
-import com.founder.focuss.webcc.dao.OnlineAgentDao;
-import com.founder.focuss.webcc.dao.OnlineUserDao;
-import com.founder.focuss.webcc.dao.ParamDao;
-import com.founder.focuss.webcc.dao.ThreadDao;
-import com.founder.focuss.webcc.domain.AgentOptLogVO;
-import com.founder.focuss.webcc.domain.AgentUserVO;
-import com.founder.focuss.webcc.domain.MessageVO;
-import com.founder.focuss.webcc.domain.ParamVO;
-import com.founder.focuss.webcc.domain.ThreadVO;
-import com.founder.focuss.webcc.domain.UserOptLogVO;
-import com.founder.focuss.webcc.entity.agent.Agent;
-import com.founder.focuss.webcc.entity.api.EndChat;
-import com.founder.focuss.webcc.entity.api.MessageTip;
-import com.founder.focuss.webcc.entity.api.UserConnection;
-import com.founder.focuss.webcc.entity.api.UserLogin;
-import com.founder.focuss.webcc.entity.user.User;
-import com.founder.focuss.webcc.service.UserOptLogService;
-import com.founder.focuss.webcc.service.WebSocketService;
-import com.founder.focuss.webcc.websocket.SystemWebSocketHandler;
+import com.yxm.web.service.WebSocketService;
 
 /**
  * 处理从websocket来的消息
@@ -48,7 +10,7 @@ import com.founder.focuss.webcc.websocket.SystemWebSocketHandler;
  * @date 2016-11-16
  */
 @Service("webSockService")
-public class WebSocketServiceImpl implements WebSocketService {
+public class WebSocketServiceImpl implements WebSocketService {/*
 	//加锁
     static final Lock instanceLock = new ReentrantLock();
 	@Autowired
@@ -85,10 +47,10 @@ public class WebSocketServiceImpl implements WebSocketService {
 	@Override
 	public void webccstart(Map<String,String> map, WebSocketSession session){
 		try {
-	    /*
+	    
 		 * 用户登录完以后 1.根据json创建用户对象 2.判断用户类型,加入到相应队列中 3.根据用户的group分配坐席
 		 * 4.坐席不为空且服务人数没有达到上限则建立连接 5.发送欢迎语 6.将坐席放在队尾 7.发送坐席坐席状态给前端控制
-		 */
+		 
     		String group = map.get("group");
 			String userId = map.get("userId");
 			String userName = map.get("userName");
@@ -100,9 +62,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 			user.setUserId(userId);
 			user.setUserName(map.get("userName"));
 			user.setLoginTime(DateUtil.datetimeFormat.format(new Date()));
-			/**
+			*//**
 			 * 获取未结束消息
-			 */
+			 *//*
 			List<AgentUserVO> agentUserList = agentUserDao.getAgentUserListByEndStatusAndUserId(userId);
 			//List<ThreadVO> threadList = threadDao.getThreadListByEndStatusAndUserId(userId);
 			if(agentUserList !=null && agentUserList.size()>0){//说明是轮训后的立即连接,不做处理
@@ -148,18 +110,18 @@ public class WebSocketServiceImpl implements WebSocketService {
 						//用户进入队列记一个时间
 						outUser.setSource(DataContext.USER_SOURCE_WEBCC);
 						ACDFactory.createUserManager().addUser(outUser);
-						/**
+						*//**
 						 * 户进队列记录日志
-						 */
+						 *//*
 						String startTime = DateUtil.datetimeFormat.format(new Date());
 						Integer optCode = DataContext.USER_OPTCODE_ENQUEUE;
 						String queueId = "";
 						String remark = "";
 						Integer optResult = DataContext.OPTRESULT_SUCCESS;
 						userOptLog(userId, userName, optCode, queueId, startTime, remark, optResult);
-						/**
+						*//**
 						 * 用户进入队列
-						 */
+						 *//*
 						ACDFactory.addWebccUserQueue(outUser);
 					}
 			 	  chat();//分配坐席用户聊天
@@ -177,18 +139,18 @@ public class WebSocketServiceImpl implements WebSocketService {
 			System.out.println("webchatclientmsg中 session"+session.getId());
 			int num=0;//定义一个变量控制发送信息到用户只有一次
 			// 1.根据id从表里面查找聊天对象(用户给消息对象赋值)	
-			/**
+			*//**
 			 * 获取参数
-			 */
+			 *//*
 			String userId = map.get("userId");
 			String agentId = map.get("agentId");
 			String userName = map.get("userName");
 			Integer sessionId = Integer.parseInt(map.get("sessionId").trim());
 			//Integer threadId = Integer.parseInt(map.get("threadId").trim());
 			String time = DateUtil.datetimeFormat.format(new Date());
-			/**
+			*//**
 			 * 查找所有聊天组
-			 */
+			 *//*
 			ACDFactory.createSocketUserManager().addWebsocketSession(userId, session);
 			
 			//List<AgentUserVO> agentUserList = agentUserDao.getAgentUserListByEndStatusAndSessionId(sessionId);
@@ -208,21 +170,21 @@ public class WebSocketServiceImpl implements WebSocketService {
 			    webSocketHandler.sendTipMessage(socketSessionList,new TextMessage(endChat.toJson()));
 			    return;
 			}
-			/**
+			*//**
 			 * 遍历发送消息(此时agentuser不为空,但是thread也许为空了,说明此时聊天已经结束了,只是我们结束聊天时候,也许操作只有thread的结束了而agentuser的没有结束,所以只有两者同步才行)
-			 */
+			 *//*
 			for (AgentUserVO agentUserVO : agentUserList) {//循环发送给其他坐席,此时循环出来的threadList也是status为:0或者1
-					/**
+					*//**
 					 * 更改agentuser，thread表中状态 为1
-					 */
+					 *//*
 				    Integer chatType = agentUserVO.getChatType();
 			    	agentUserDao.updateStatusAndChatTypeByUserIdAndAgentId(DataContext.CHAT_STATUS_CHATTING,chatType,agentUserVO.getUserId(), agentUserVO.getAgentId());
 				   // threadDao.updateStatusByEndStatusAndAgentUserId(1,agentUserVO.getAgentUserId());
 					//1.获取threadid(此时的threadid有可能为多个值数组形式,)
 					Integer[] threadIds = threadDao.getThreadIdByEndStatusAndAgentUserId(agentUserVO.getAgentUserId());
-					/**
+					*//**
 					 * 异常处理
-					 */
+					 *//*
 					if(threadIds.length==0){//此时agentuser没有结束,但是thread全部结束,此时我们更新最新一个thread为1
 						threadDao.updateLastStatusByAgentUserId(DataContext.CHAT_STATUS_CHATTING, agentUserVO.getAgentUserId());
 						threadId=threadDao.getThreadIdByEndStatusAndAgentUserId(agentUserVO.getAgentUserId())[0];
@@ -288,13 +250,13 @@ public class WebSocketServiceImpl implements WebSocketService {
 	@Override
 	public void agentstatus(Map<String,String> map,WebSocketSession session) {
 		// 1. 根据状态对空闲队列进行操作
-		/*
+		
 		 * 状态：空闲（free），不空闲(busy) 
 		 * 原则：
 		 * 1.不空闲，聊天数为0---出空闲队列(说明在处理软电话)
 		 * 2.空闲，聊天数为0---空闲队列(都有可能处理)
 		 * 3.不空闲，聊天数大于0---空闲队列(说明在处理聊天)
-		 */
+		 
 		try {
 			// 1.获取坐席状态和聊天数
 			String status = (String) map.get("status");
@@ -338,25 +300,25 @@ public class WebSocketServiceImpl implements WebSocketService {
 						}
 					}else if(count>0){//在1情况下,webcc正在聊天
 						if("ctiInit".equals(status)){//签入
-							/*MessageTip messageTip = new MessageTip();
+							MessageTip messageTip = new MessageTip();
 							messageTip.setCmd("webccrequestctichating");
 							List<WebSocketSession> stateSession = ACDFactory.createStateSocketAgentManager().getSocketSessionList(agentId);
-							webSocketHandler.sendTipMessage(stateSession, new TextMessage(messageTip.toJson()));*/
+							webSocketHandler.sendTipMessage(stateSession, new TextMessage(messageTip.toJson()));
 						}else if("ctiReady".equals(status)){//就绪
-							/*MessageTip messageTip = new MessageTip();
+							MessageTip messageTip = new MessageTip();
 							messageTip.setCmd("webccrequestctichating");
 							List<WebSocketSession> stateSession = ACDFactory.createStateSocketAgentManager().getSocketSessionList(agentId);
-							webSocketHandler.sendTipMessage(stateSession, new TextMessage(messageTip.toJson()));*/
+							webSocketHandler.sendTipMessage(stateSession, new TextMessage(messageTip.toJson()));
 						}else if("ctiOut".equals(status)){//签出
 							return;
 						}else if("ctiNotReady".equals(status)){//小修
 							return;
 						}else{//通话
 							//提示CTI webcc在聊天
-							/*MessageTip messageTip = new MessageTip();
+							MessageTip messageTip = new MessageTip();
 							messageTip.setCmd("webccrequestctichating");
 							List<WebSocketSession> stateSession = ACDFactory.createStateSocketAgentManager().getSocketSessionList(agentId);
-							webSocketHandler.sendTipMessage(stateSession, new TextMessage(messageTip.toJson()));*/
+							webSocketHandler.sendTipMessage(stateSession, new TextMessage(messageTip.toJson()));
 							return;
 						}
 					}
@@ -368,9 +330,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 		}
 	}
 	public void chat(){
-		/**分配坐席原则,是先分配坐席,如果没有空闲坐席再去放入空闲队列,所以是两个
+		*//**分配坐席原则,是先分配坐席,如果没有空闲坐席再去放入空闲队列,所以是两个
 		 * 定时监测(定时器定时执行) 1.从用户队列中监测出是否有等待用户 2.有用户从空闲坐席队列中取队列 3.建立聊天
-		 * **/
+		 * **//*
 		instanceLock.lock();
 		try {
 			// 1.从用户队列中监测出是否有等待用户
@@ -393,9 +355,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 						if(serveNumCalculate(assignAgent)){
 						List<WebSocketSession> agentSession = ACDFactory.createSocketAgentManager().getSocketSessionList(assignAgent.getAgentId());
 						String time = DateUtil.datetimeFormat.format(new Date());
-						/**
+						*//**
 						 * 先去session表中查找,查找到了就复用,不然新建立
-						 */
+						 *//*
 						AgentUserVO agentUser = agentUserDao.getAgentUserByUserIdAndAgentId(user.getUserId(),assignAgent.getAgentId());
 						ThreadVO threadVo = new ThreadVO();
 						if(agentUser==null){
@@ -436,9 +398,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 							agentUserDao.updateStatusAndChatTypeByUserIdAndAgentId(DataContext.CHAT_STATUS_WAITING, chatType, agentUser.getUserId(),agentUser.getAgentId());
 							//检查上一次会话是否结束，没有结束我们设置为异常结束
 							checkChatEnd(assignAgent.getAgentId(),user.getUserId());
-							/**
+							*//**
 							 * 新建会话
-							 */
+							 *//*
 							threadVo.setAgentId(assignAgent.getAgentId());
 							threadVo.setAgentName(assignAgent.getAgentName());
 							threadVo.setSource(2);
@@ -454,9 +416,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 							threadVo.setSessionId(agentUser.getSessionId());
 							threadDao.save(threadVo);
 						}
-						/**
+						*//**
 						 * 发送用户登录欢迎语给前端
-						 */
+						 *//*
 						userLogin.setThreadId(threadVo.getThreadId());
 						userLogin.setAgentId(assignAgent.getAgentId());
 						userLogin.setSessionId(threadVo.getSessionId());
@@ -465,9 +427,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 						List<WebSocketSession> userSession = ACDFactory.createSocketUserManager().getSocketSessionList(user.getUserId());
 						webSocketHandler.sendTipMessage(userSession,
 								new TextMessage(userLogin.toJson()));
-					   /**
+					   *//**
 					    * 通知坐席,有用户建立连接
-					    */
+					    *//*
 					   MessageTip messageTip = new MessageTip();
 					   messageTip.setCmd("userstartchat");
 					   messageTip.setFromId(threadVo.getUserId());
@@ -480,9 +442,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 					   messageTip.setSource(threadVo.getSource());
 					   webSocketHandler.sendTipMessage(agentSession, new TextMessage(messageTip.toJson()));
 						
-					   /**
+					   *//**
 					    * 用户聊天日志
-					    */
+					    *//*
 					    String userId = user.getUserId();
 					    String userName = user.getUserName();
 					    Integer optCode = DataContext.USER_OPTCODE_CHAT;
@@ -491,24 +453,24 @@ public class WebSocketServiceImpl implements WebSocketService {
 					    Integer optResult = DataContext.OPTRESULT_SUCCESS;
 					    userOptLog(userId, userName, optCode, queueId, time, remark, optResult);
 					    
-					    /**
+					    *//**
 					     * 坐席聊天日志
-					     */
+					     *//*
 					   agentOptLog(assignAgent.getAgentId(), assignAgent.getAgentName(),-1, 30, 1, "", "", threadVo.getThreadId(), "", "", user.getUserId(),user.getUserName());
 					   
-					   /**
+					   *//**
 					    * 更新坐席
-					    */
+					    *//*
 					   ACDFactory.createAgentManager().addAgent(assignAgent);
 					   
-					   /**
+					   *//**
 					    * 将队列放置最尾部
-					    */
+					    *//*
 						ACDFactory.buildFreeAgentQueue(assignAgent);
 
-						/**
+						*//**
 						 * 通知CTI离线
-						 */
+						 *//*
 						MessageTip ctitip = new MessageTip();
 						ctitip.setCmd("webccchat");
 						//@WebSocketSession stateSession = WebSocketSessionUtil.agentStateSessionMap.get(assignAgent.getAgentId());
@@ -525,9 +487,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 									new TextMessage(userLogin.toJson()));
 						}
 					} else {
-						/**
+						*//**
 						 * 没有坐席的时候，让其跳转到留言页面
-						 */
+						 *//*
 						userLogin.setType("2");//2.没有坐席
 						userLogin.setReminderContent("没有客服在线");
 						List<WebSocketSession> session = ACDFactory.createSocketUserManager().getSocketSessionList(user.getUserId());
@@ -545,9 +507,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 					List<WebSocketSession> userSession = ACDFactory.createSocketUserManager().getSocketSessionList(user.getUserId());
 					webSocketHandler.sendTipMessage(userSession,
 							new TextMessage(userLogin.toJson()));
-					 /* ****************
+					  ****************
 					  *等待超时记录用户日志
-					 *******************/
+					 ******************
 					String userId = user.getUserId();
 					String userName = user.getUserName();
 					Integer optCode = DataContext.USER_OPTCODE_WAITTIMEOUT;
@@ -567,17 +529,17 @@ public class WebSocketServiceImpl implements WebSocketService {
 		}
 		instanceLock.unlock();
 	}
-	/**
+	*//**
 	 * 根据消息来源(webcc,wechat,weibo)处理agentmsg
 	 * @param source
 	 * @param map
 	 * @param session
-	 */
+	 *//*
 	private void AgentMsgHande(Integer source, Map<String,String> map, WebSocketSession session) {
 		try {
-			/**
+			*//**
 			 * 获取参数
-			 */
+			 *//*
 			ThreadVO threadVO = new ThreadVO();
 			String agentId = map.get("agentId");//当前坐席,对于其他坐席有可能充当用户级别
 			String agentName = map.get("agentName");
@@ -587,9 +549,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 			String msg = map.get("msg");
 			
 			//^^^^^^^^^^^^^^注意:此时的userId不一定是用户的userId,也许是群聊时候坐席的agentId^^^^^^^^^^^^^^^^^^^注意
-			/**
+			*//**
 			 * 发送消息给用户
-			 */
+			 *//*
 			ACDFactory.createSocketAgentManager().addWebsocketSession(agentId, session);
 			AgentUserVO agentUserVO = agentUserDao.getAgentUserBySessionIdAndAgentId(sessionId,agentId);
 			if(agentUserVO!=null){
@@ -598,9 +560,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 				}
 				Integer agentUserId = agentUserVO.getAgentUserId();
 				
-				/**
+				*//**
 				 * 单聊；组装消息，发送给对应坐席和客户
-				 */
+				 *//*
 				//根据sessionId得到会话id
 				//List<AgentUserVO> agentUserList = agentUserDao.getAgentUserListByEndStatusAndSessionId(sessionId);
 				Integer chatStatusEnd = DataContext.CHAT_STATUS_END;
@@ -618,9 +580,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 				    webSocketHandler.sendTipMessage(socketSessionList,new TextMessage(endChat.toJson()));
 				    return;
 				}else{
-					/**
+					*//**
 					 * 异常处理
-					 */
+					 *//*
 					Integer[] threadIds = threadDao.getThreadIdByEndStatusAndAgentUserId(agentUserId);
 					if(threadIds.length==0){//此时agentuser没有结束,但是thread全部结束,此时我们更新最新一个thread为1
 						threadDao.updateLastStatusByUserIdAndAgentId(1, userId, agentId);
@@ -633,9 +595,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 						threadVO = threadDao.getThreadByEndStatusAndUserIdAndAgentId(userId, agentId);
 					}
 					
-					/**
+					*//**
 					 * 消息组装
-					 */
+					 *//*
 					MessageVO messageVO = new MessageVO();
 					messageVO.setFromId(agentId);
 					messageVO.setFromName(agentName);
@@ -660,9 +622,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 						
 					}
 					 
-					/**
+					*//**
 					 * 循环发送给多坐席
-					 */
+					 *//*
 					for (AgentUserVO agentUser : agentUserList) {//循环发送消息
 					// 组装消息(此时消息为Message) 发送给本坐席
 					ThreadVO thread = threadDao.getThreadByEndStatusAndUserIdAndAgentId(agentUser.getUserId(), agentUser.getAgentId());
@@ -694,13 +656,13 @@ public class WebSocketServiceImpl implements WebSocketService {
 						messageDao.save(toAgentMessage);
 					}
 					
-					/**
+					*//**
 					 * 推送消息给坐席
-					 */
+					 *//*
 					webSocketHandler.sendMessageToAgent(thread.getAgentId(),toAgentMessage);
-					/**
+					*//**
 					 * 推送消息给坐席提示按钮闪烁
-					 */
+					 *//*
 					List<WebSocketSession> stateSession = ACDFactory.createStateSocketAgentManager().getSocketSessionList(thread.getAgentId());
 					webSocketHandler.sendTipMessage(stateSession, new TextMessage(
 							toAgentMessage.toJson()));
@@ -772,11 +734,11 @@ public class WebSocketServiceImpl implements WebSocketService {
 			threadDao.updateStatusByThreadId(threadId, status);
 		}
 	}
-	 /**
+	 *//**
 	  * 计算等待是否超时
 	  * @param user
 	  * @return true,false
-	  */
+	  *//*
 	private boolean timeCalculate(User user){
 		try {
 			String loginTime = user.getLoginTime();
@@ -801,9 +763,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 			return false;
 		}
 	}
-	/*************************
+	*//*************************
 	 * 坐席进入队列
-	 * *******************/
+	 * *******************//*
 	public void enterQueue(Agent agent){
 		String status = agent.getStatus();
 		//坐席进入队列条件是服务数量和坐席没有离线
@@ -811,11 +773,11 @@ public class WebSocketServiceImpl implements WebSocketService {
 			ACDFactory.buildFreeAgentQueue(agent);
 		}
 	}
-	/***
+	*//***
 	 * 计算坐席服务数量
 	 * @param agent
 	 * @return
-	 */
+	 *//*
 	private boolean serveNumCalculate(Agent agent){
 		 try {
 		    ParamVO maxUserVO =  new ParamVO();
@@ -846,10 +808,10 @@ public class WebSocketServiceImpl implements WebSocketService {
         //主要实现给坐席绑定状态报告的WebSocketSession	
 		String agentId = (String)map.get("agentId");
 		//@WebSocketSessionUtil.agentStateSessionMap.put(agentId, session);
-		/*StateSocketAgent stateSocketAgent = new StateSocketAgent();
+		StateSocketAgent stateSocketAgent = new StateSocketAgent();
 		stateSocketAgent.setAgentId(agentId);
 		stateSocketAgent.setSession(session);
-		ACDFactory.createStateSocketAgentManager().addStateSocketAgent(stateSocketAgent);*/
+		ACDFactory.createStateSocketAgentManager().addStateSocketAgent(stateSocketAgent);
 		ACDFactory.createStateSocketAgentManager().addWebsocketSession(agentId, session);
 	}
 
@@ -870,9 +832,9 @@ public class WebSocketServiceImpl implements WebSocketService {
 			WebSocketSession session) {
 		System.out.println("####################webchatclientend执行##########################");
 		try {
-			/**
+			*//**
 			 * 获取参数
-			 */
+			 *//*
 			String userId = map.get("userId");
 			Integer sessionId = Integer.parseInt(map.get("sessionId"));
 			String endTime = DateUtil.datetimeFormat.format(new Date());
@@ -884,17 +846,17 @@ public class WebSocketServiceImpl implements WebSocketService {
 			endChat.setUserId(userId);
 			endChat.setSessionId(sessionId);
 
-			/**
+			*//**
 			 * 通知坐席会话结束
-			 */
+			 *//*
 			Integer chatStatusEnd = DataContext.CHAT_STATUS_END;
 			Integer chattypeChat = DataContext.CHATTYPE_CHAT;
 			List<AgentUserVO> agentUserList = agentUserDao.getAgentUserListByEndStatusAndChatTypeAndUserId(chatStatusEnd,chattypeChat,userId);
 			for (AgentUserVO agentUserVO : agentUserList) {
 				List<WebSocketSession> agentSession = ACDFactory.createSocketAgentManager().getSocketSessionList(agentUserVO.getAgentId());
-				/**
+				*//**
 				 * 结束会话
-				 */
+				 *//*
 				//结束agentuser
 				//agentUserDao.updateStatusByUserIdAndAgentId(2, userId, agentUserVO.getAgentId());
 				Integer chatType=DataContext.CHATTYPE_CHAT;
@@ -903,19 +865,19 @@ public class WebSocketServiceImpl implements WebSocketService {
 				ThreadVO thread = threadDao.getThreadByEndStatusAndAgentUserId(agentUserVO.getAgentUserId());
 				String responseTime=messageDao.getResponseTimeByThreadIdAndAgentId(thread.getThreadId(),agentUserVO.getAgentId());
 				threadDao.agentEndByEndStatusAndUserIdAndAgentId(2, responseTime, 2, endTime, userId, agentUserVO.getAgentId());
-				/**
+				*//**
 				 * 给出坐席提示
-				 */
+				 *//*
 				webSocketHandler.sendTipMessage(agentSession, new TextMessage(
 						endChat.toJson()));
 
-				/**
+				*//**
 				 * 给出用户提示
-				 */
+				 *//*
 				webSocketHandler.sendTipMessage(userSocket,new TextMessage(endChat.toJson()));
-				/**
+				*//**
 				 * 坐席结束会话,判断看是否进入队列,重新进入队列 
-				 */
+				 *//*
 				if (!ACDFactory.containsFreeAgent(agentUserVO.getAgentId())) {
 					// Agent agent =
 					// ACDUtil.agentInfoMap.get(threadVO.getAgentId());
@@ -934,10 +896,10 @@ public class WebSocketServiceImpl implements WebSocketService {
 			e.printStackTrace();
 		}
 	}
-  /**
+  *//**
    * 坐席日志记录
    * 
-   */
+   *//*
   @Override
   public void agentOptLog(String agentId,String agentName,int entId,int optCode,int optResult,String queueId,String remark,int threadId,String toAgentId,String toUserId,String userId,String userName){
 	 try {
@@ -964,9 +926,9 @@ public class WebSocketServiceImpl implements WebSocketService {
   }
   @Override
   public void userOptLog(String userId,String userName,Integer optCode,String queueId,String startTime,String remark,Integer optResult){
-	  /**
+	  *//**
 		 * 户进队列记录日志
-		 */
+		 *//*
 		UserOptLogVO userOptLogVO = new UserOptLogVO();
 		userOptLogVO.setUserId(userId);
 		userOptLogVO.setUserName(userName);
@@ -988,16 +950,16 @@ public class WebSocketServiceImpl implements WebSocketService {
 			}
 			if(agent!=null && !DataContext.AGENT_STATUS_OFFLINE.equals(agent.getStatus())){
 				if (lastmsgId == 0) {// 此时用户刷新,恢复到以前状态,通过thread表获取消息
-					/**
+					*//**
 					 * 通过agentId和status !=2 获取所有未结束会话
-					 */
+					 *//*
 					List<AgentUserVO> agentUserList = agentUserDao.getAgentUserListByEndStatusAndAgentId(agentId);
 					// List<SessionVO> sessionList =
 					// sessionDao.getSessionListByEndStatusAndAgentId(agentId);
 					for (AgentUserVO agentUserVO : agentUserList) {
-						/**
+						*//**
 						 * 根据sessionId和lastmsgid查找message
-						 */
+						 *//*
 						 ThreadVO thread = threadDao.getThreadByEndStatusAndAgentUserId(agentUserVO.getAgentUserId());
 						if(thread!=null){
 							Integer threadId = thread.getThreadId();
@@ -1042,4 +1004,4 @@ public class WebSocketServiceImpl implements WebSocketService {
 		 
 	 }
   }
-}
+*/}

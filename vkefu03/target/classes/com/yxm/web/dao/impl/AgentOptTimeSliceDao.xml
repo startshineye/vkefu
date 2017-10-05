@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxm.web.dao.AgentOptTimeSliceDao">
+ <insert id="save">
+ insert into  
+      fouss_im_agentopt_timeslice(ID,ONLINETIMESLICE,OFFLINETIMESLICE,AGENTID,AGENTNAME,ENDTIME) 
+     values(AGENTOPTSLICE_SEQ.NEXTVAL,#{onlineTimeSlice},#{offlineTimeSlice},#{agentId},#{agentName},#{endTime})
+  </insert>
+  
+  
+  <select id="getEndTime" resultType="java.lang.String">
+       select endtime from (select endtime from fouss_im_agentopt_timeslice order by id desc) where rownum=1
+  </select>
+  
+  <delete id="delAll">
+      delete from fouss_im_agentopt_timeslice
+  </delete>
+  
+</mapper>

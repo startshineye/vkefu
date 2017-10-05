@@ -1,9 +1,6 @@
-package com.founder.focuss.webcc.service;
-
-import com.founder.focuss.webcc.domain.AgentOptLogVO;
-
+package com.yxm.web.service;
+import com.yxm.web.domain.AgentOptLogVO;
 public interface AgentOptLogService {
-
 	void save(AgentOptLogVO agentOptLogVO);
     /**
      * 坐席操作日志记录

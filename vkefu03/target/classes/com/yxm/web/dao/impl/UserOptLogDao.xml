@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxm.web.dao.UserOptLogDao">
+  <insert id="save">
+    insert into FOUSS_IM_USEROPTLOG(ID,USERID,USERNAME,QUEUEID,STARTTIME,OPTCODE,OPTRESULT,REMARK) values(
+    USEROPTLOG_SEQ.Nextval,#{userId},#{userName},#{queueId},#{startTime},#{optCode},#{optResult},#{remark})
+  </insert>
+  
+  <select id="getUserOptLogListByLastUserOptId" resultType="com.yxm.web.domain.UserOptLogVO">
+      select * from fouss_im_useroptlog t where t.optresult = 1 and t.id &gt;#{0} and t.optresult = 1 order by t.starttime asc
+  </select>
+</mapper>

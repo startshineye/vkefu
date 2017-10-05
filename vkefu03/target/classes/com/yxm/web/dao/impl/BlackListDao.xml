@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxm.web.dao.BlackListDao">
+	<select id="getAllBlackList" resultType="com.yxm.web.domain.BlackListVO">
+		select * from FOUSS_IM_BLACKLIST order by BLACKLISTID
+	</select>
+
+	<insert id="insert">
+	   insert into FOUSS_IM_BLACKLIST(BLACKLISTID,AGENTID,USERINFO,USERTYPE,STARTTIME,REASON) values(BLACKLIST_SEQ.Nextval,#{agentId},#{userInfo},#{userType},#{startTime},#{reason})
+	</insert>
+	
+	<select id="selectBlackListByUserInfo" resultType="com.yxm.web.domain.BlackListVO">
+	   select * from FOUSS_IM_BLACKLIST where USERINFO=#{0}
+	</select>
+</mapper>

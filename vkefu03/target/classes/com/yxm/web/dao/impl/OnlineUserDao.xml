@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxm.web.dao.OnlineUserDao">
+	   <insert id="insert">
+		insert into
+			fouss_im_onlineuser(ID,USERID,USERNAME,SOURCE,USERTYPE,LOGINTIME,CHATSTATUS,OPERSYSTEM,IP,BROWSER,STATUS,MOBILE,COUNTRY,CITY,PROVINCE)
+		values(ONLINEUSER_SEQ.Nextval,#{userId},#{userName},#{source},#{userType},#{loginTime},#{chatStatus},#{operSystem},#{ip},#{browser},#{status},#{mobile},#{country},#{city},#{province})
+		</insert>
+		
+       <update id="update">
+       update fouss_im_onlineuser
+          <trim prefix="set" suffixOverrides=",">
+		      <if test="userName!=null and userName!=''">USERNAME=#{userName},</if>
+			  <if test="source!=null and source!=''">SOURCE=#{source},</if>
+			  <if test="userType!=null and userType!=''">USERTYPE=#{userType},</if>
+			  <if test="loginTime!=null and loginTime!=''">LOGINTIME=#{loginTime},</if>
+			  <if test="chatStatus!=null and chatStatus!=''">CHATSTATUS=#{chatStatus},</if>
+			  <if test="operSystem!=null and operSystem!=''">OPERSYSTEM=#{operSystem},</if>
+			  <if test="ip!=null and ip!=''"> IP=#{ip},</if>
+			  <if test="browser!=null and browser!=''">BROWSER=#{browser},</if>
+			  <if test="status!=null and status!=''">STATUS=#{status},</if>
+			  <if test="mobile!=null and mobile!=''">MOBILE=#{mobile},</if>
+			  <if test="country!=null and country!=''">COUNTRY=#{country},</if>
+			  <if test="city!=null and city!=''">CITY=#{city},</if>
+			  <if test="province!=null and province!=''">PROVINCE=#{province},</if>
+		  </trim>
+       where userid = #{userId}
+       </update>
+   
+       <select id="getByUserId" resultType="com.yxm.web.entity.user.User">
+        select * from fouss_im_onlineuser where userid = #{0}
+       </select>
+</mapper>

@@ -1,6 +1,5 @@
-package com.founder.focuss.webcc.service;
-
-import com.founder.focuss.webcc.domain.SatisfactionVO;
+package com.yxm.web.service;
+import com.yxm.web.domain.SatisfactionVO;
 public interface SatisfactionService {
 	/**
 	 * 保存信息

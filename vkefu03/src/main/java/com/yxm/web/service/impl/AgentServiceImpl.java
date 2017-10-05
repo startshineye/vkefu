@@ -1,20 +1,14 @@
-package com.founder.focuss.webcc.service.impl;
-
+package com.yxm.web.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
-
 import org.springframework.stereotype.Service;
-
-import com.founder.focuss.utils.factory.ACDFactory;
-import com.founder.focuss.webcc.domain.PaginationVO;
-import com.founder.focuss.webcc.entity.agent.Agent;
-import com.founder.focuss.webcc.entity.api.AgentShow;
-import com.founder.focuss.webcc.service.AgentService;
-
+import com.yxm.util.factory.ACDFactory;
+import com.yxm.web.domain.PaginationVO;
+import com.yxm.web.entity.agent.Agent;
+import com.yxm.web.service.AgentService;
 @Service("agentService")
 public class AgentServiceImpl implements AgentService{
-   @Override
    public PaginationVO<Agent> getByPage(Integer pageNo,Integer pageSize,String agentId){
 	   //0.定义变量及初始化
 	   PaginationVO<Agent> paginationVO = new PaginationVO<Agent>();

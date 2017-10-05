@@ -1,10 +1,8 @@
-package com.founder.focuss.webcc.service;
-
+package com.yxm.web.service;
 import java.util.List;
 
-import com.founder.focuss.webcc.domain.AgentUserVO;
-import com.founder.focuss.webcc.domain.PaginationVO;
-
+import com.yxm.web.domain.AgentUserVO;
+import com.yxm.web.domain.PaginationVO;
 public interface AgentUserService {
 	/**
 	 * 保存 (自动包含sessionId)
