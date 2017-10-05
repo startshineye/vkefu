@@ -1,4 +1,5 @@
 package com.yxm;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,7 @@ import com.yxm.util.exception.GlobalExceptionListener;
  *@SpringBootApplication声明应用启动类
  */
 @SpringBootApplication
+@MapperScan("com.yxm.web.dao")
 public class App 
 {
 	//注入application.properties的属性到指定变量中

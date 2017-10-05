@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yxm.web.dao.MessageDao">
+	<insert id="save" parameterType="com.yxm.web.domain.MessageVO">
+	 <selectKey resultType="INTEGER" order="BEFORE" keyProperty="messageId">
+	     SELECT MESSAGE_SEQ.NEXTVAL as messageId from DUAL
+	 </selectKey>
+	 insert into 
+	     fouss_im_message(MESSAGEID,THREADID,SOURCE,STATUS,MESSAGETYPE,MESSAGE,MESSAGETIME,FROMID,FROMNAME,OWNERID,OWNERNAME,SHOW,MESSAGEFROM,SESSIONID)
+	values(#{messageId},#{threadId},#{source},#{status},#{messageType},#{message},#{messageTime},#{fromId},#{fromName},#{ownerId},#{ownerName},#{show},#{messageFrom},#{sessionId})
+	</insert>
+	
+	<select id="getAllByThreadid" resultType="com.yxm.web.domain.MessageVO">
+	   select * from fouss_im_message where THREADID = #{0}
+	</select>
+	
+	<select id="getAllMessage" resultType="com.yxm.web.domain.MessageVO">
+	select * from fouss_im_message where THREADID = (select threadid from
+	fouss_im_thread where userid = #{0} and agentid = #{1}) and MESSAGETIME &lt; #{2} order by MESSAGETIME
+	</select>
+	
+	<select id="getAllByMessageid" resultType="com.yxm.web.domain.MessageVO">
+	select * from fouss_im_message where THREADID = (select threadid from
+	fouss_im_thread where userid = #{0} and agentid = #{1}) and MESSAGEID &gt; #{2}
+	</select>
+	
+	<select id="getLastMsgid" resultType="java.lang.Long">
+	  select messageid from (
+	   select * from fouss_im_message where THREADID = (select threadid from
+	   fouss_im_thread where userid = #{0} and agentid = #{1}) order by messagetime desc
+	   ) where rownum=1
+	</select>
+	
+	<select id="getAll" resultType="com.yxm.web.domain.MessageVO">
+	  select * from fouss_im_message
+	</select>
+	
+	<select id="getMessageId" resultType="java.lang.Integer">
+	   select MESSAGEID from (select * from fouss_im_message where MESSAGE = #{0} and FROMID = #{1} order by messagetime desc) where rownum = 1
+	</select>
+	
+	<select id="getMessageListBySessionIdAndThreadId" resultType="com.yxm.web.domain.MessageVO">
+	    select * from (select * from fouss_im_message where sessionid =  #{0} and threadid = #{1}) where rownum &lt;= 20 order by messagetime
+	</select>
+
+   <select id="getUnreadMessage" resultType="com.yxm.web.domain.MessageVO">
+	    select *  from fouss_im_message where threadid=#{0} and sessionid=#{1} and messageid &gt; #{2} order by messageid
+	</select>
+	
+	<select id="getUnreadUserMessage" resultType="com.yxm.web.domain.MessageVO">
+	    select *  from fouss_im_message where sessionid=#{0} and messageid &gt; #{1} order by messageid
+	</select>
+	
+	<!-- OK -->
+	<select id="getUserRecordByUserIdAndAgentId" resultType="com.yxm.web.domain.MessageVO">
+     select 
+			rr.*
+		from
+			(select 
+				r.*,rownum linenum
+			from
+			(select m.messageid,m.threadid,m.sessionid,m.source,m.fromid,m.fromname,m.messagefrom,m.messagetype,m.message,m.messagetime 
+	                from fouss_im_message m 
+	         join (select t.*,rownum from( select threadid from fouss_im_thread where userid=#{2} and agentid=#{3} order by threadid desc) t ) tt 
+	                on tt.threadid=m.threadid order by messageid desc) r
+			where
+			rownum &lt;= #{0}*#{1}) rr
+		where 
+			linenum &gt;(#{0}-1)*#{1}
+    </select>
+    
+    <!-- ok -->
+    <select id="getAgentRecord" resultType="com.yxm.web.domain.MessageVO">
+        select 
+			tt.*
+		from
+			(select  
+				t.*,rownum linenum
+			from
+				(
+                 select * from fouss_im_message m join (select * from fouss_im_thread where  agentid=#{3} and sessionid=#{2}) r on r.threadid=m.threadid and rownum&lt;=600 order by messageid desc
+				)t
+			where
+			rownum &lt;= #{0}*#{1}) tt
+		where 
+			linenum &gt;(#{0}-1)*#{1} order by messageid
+    </select>
+    
+    <!-- OK -->
+    <select id="getMessageTotalByUserIdAndAgentId" resultType="java.lang.Long">
+	    select count(m.messageid) 
+	                from fouss_im_message m 
+	         join (select t.* from( select threadid from fouss_im_thread where userid=#{0} and agentid=#{1} order by threadid desc) t ) tt 
+	                on tt.threadid=m.threadid order by messageid desc
+	</select>
+	
+	<select id="getMessageTotalBySessionIdAndAgentId"  resultType="java.lang.Long">
+	     select count(*) from fouss_im_message m join (select * from fouss_im_thread where  agentid=#{1} and sessionid=#{0}) t on t.threadid=m.threadid
+	</select>
+	<!--OK-->
+	<select id="getResponseTimeByThreadIdAndAgentId" resultType="java.lang.String">
+	    select messagetime from (select messagetime from fouss_im_message where threadid = #{0} and fromid=#{1} order by messagetime) where rownum=1
+	</select>
+	
+	<!-- ok -->
+	<select id="getMoreHistoryByUserIdAndAgentId" resultType="com.yxm.web.domain.MessageVO">
+	 select 
+			rr.*
+		from
+			(select 
+				r.*,rownum linenum
+			from
+			(select m.messageid,m.threadid,m.sessionid,m.source,m.fromid,m.fromname,m.messagefrom,m.messagetype,m.message,m.messagetime 
+	                from fouss_im_message m 
+	         join (select t.*,rownum from( select threadid from fouss_im_thread where userid=#{2} and agentid=#{3} order by threadid desc) t where rownum&lt;=5) tt 
+	                on tt.threadid=m.threadid where messageid&lt;#{4} order by messageid desc) r
+			where
+			rownum &lt;= #{0}*#{1}) rr
+		where 
+			linenum &gt;(#{0}-1)*#{1}
+	</select>
+	
+	<select id="getMoreHistoryByUserIdAndAgentIdNoMinMessageId" resultType="com.yxm.web.domain.MessageVO">
+	  select 
+			rr.*
+		from
+			(select 
+				r.*,rownum linenum
+			from
+			(select m.messageid,m.threadid,m.sessionid,m.source,m.fromid,m.fromname,m.messagefrom,m.messagetype,m.message,m.messagetime 
+	                from fouss_im_message m 
+	         join (select t.*,rownum from( select threadid from fouss_im_thread where userid=#{2} and agentid=#{3} order by threadid desc) t where rownum&lt;=5) tt 
+	                on tt.threadid=m.threadid order by messageid desc) r
+			where
+			rownum &lt;= #{0}*#{1}) rr
+		where 
+			linenum &gt;(#{0}-1)*#{1}
+	</select>
+</mapper>
+
+
+

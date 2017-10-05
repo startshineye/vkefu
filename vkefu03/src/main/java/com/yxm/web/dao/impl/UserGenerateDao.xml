@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yxm.web.dao.UserGenerateDao">
+	<insert id="save">
+	  insert into FOUSS_IM_USERGENERATE(USERID,USERNAME) values(USERGENERATE_SEQ.Nextval,#{userName})
+	</insert>
+	
+	<select id="getLastId" resultType="java.lang.Integer">
+		select max(userid) from FOUSS_IM_USERGENERATE order by userid desc
+	</select>
+	
+	<select id="getByLastId" resultType="com.yxm.web.domain.UserGenerateVO">
+		select * from FOUSS_IM_USERGENERATE where userid = (select max(userid) from FOUSS_IM_USERGENERATE)
+	</select>
+	
+	<select id="isEmpty" resultType="java.lang.Integer">
+		select count(*) from FOUSS_IM_USERGENERATE
+	</select>
+	
+	<update id="update">
+	    update FOUSS_IM_USERGENERATE set USERNAME = #{userName} where USERID = #{userId}
+	</update>
+</mapper>
