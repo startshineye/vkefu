@@ -19,12 +19,13 @@ public class ServerRunner implements CommandLineRunner{
 	private AgentEventHandler agentHandler;
 	@Autowired
 	public ServerRunner(SocketIOServer server,AgentEventHandler agentHandler){
-		System.out.println("***ServerRunner*** server "+server);
+		System.out.println("***ServerRunner method***"+server);
 		this.server=server;
 		//this.imEventHandler=imEventHandler;
 		this.agentHandler=agentHandler;
 	}
 	public void run(String... arg0) throws Exception {
+		System.out.println("***run method***");
 		//System.out.println("**ServerRunner run**"+server+" imEventHandler"+imEventHandler+" agentHandler"+agentHandler);
 		//System.out.println("**imEventHandlerRunner run**"+imEventHandler);
 		//server.getNamespace(Context.NameSpaceEnum.IM.getNamespace()).addListeners(imEventHandler);

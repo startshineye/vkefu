@@ -3,7 +3,7 @@ Implementation-Vendor: Pivotal Software, Inc.
 Implementation-Title: spring-boot
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: com.yxm
-Build-Jdk: 1.6.0_13
+Build-Jdk: 1.7.0_45
 Built-By: Administrator
 Created-By: Maven Integration for Eclipse
 Implementation-URL: http://projects.spring.io/spring-boot/spring-boot/

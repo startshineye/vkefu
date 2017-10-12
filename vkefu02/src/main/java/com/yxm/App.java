@@ -26,6 +26,7 @@ public class App
 	
 	@Bean
 	public SocketIOServer socketIOServer(){
+		System.out.println("**SocketIOServer method**");
 		Configuration configuration = new Configuration();
 		configuration.setHostname(host);
 		configuration.setPort(port);
@@ -50,7 +51,7 @@ public class App
 	
 	@Bean
 	public SpringAnnotationScanner springAnnotationScanner(SocketIOServer socketIOServer){
-		System.out.println("SpringAnnotationScanner ");
+		System.out.println("**springAnnotationScanner method**");
 		return new SpringAnnotationScanner(socketIOServer);
 	}
     public static void main( String[] args )
