@@ -12,9 +12,9 @@ layui.use(['jquery','layer','form'],function(){
     
     //登录链接测试，使用时可删除
     $(".submit_btn").click(function(){
-     var username = document.getElementById("username");
-     var password = document.getElementById("password");
-      location.href="admin/index.do?username ="+username +"&password="+password;
+     var username = document.getElementById("username").value;
+     var password = document.getElementById("password").value;
+      location.href="admin/login.do?username="+username +"&password="+password;
      /* $.ajax({
     	  url:"",
     	  type:"post",

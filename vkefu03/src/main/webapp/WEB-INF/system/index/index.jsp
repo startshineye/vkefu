@@ -1,6 +1,12 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="<%=basePath%>">
     <meta charset="UTF-8">
     <title>在线客服平台</title>
 	<meta name="keywords" content="LarryCMS后台登录界面" />
@@ -219,4 +225,4 @@
    </div>
 </div>
 </body>
-</html>
+</html

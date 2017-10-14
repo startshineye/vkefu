@@ -50,7 +50,6 @@ public class App
 		System.out.println("Configuration host"+host+" port"+port+" socketIOServer"+socketIOServer);
 		return socketIOServer;
 	}
-	
 	@Bean
 	public SpringAnnotationScanner springAnnotationScanner(SocketIOServer socketIOServer){
 		System.out.println("SpringAnnotationScanner ");
