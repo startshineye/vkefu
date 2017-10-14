@@ -1,6 +1,6 @@
 var navtab;
 layui.config({
-    base: '../backstage/js/lib/' //layui自定义layui组件目录
+    base: '../js/lib/' //layui自定义layui组件目录
 }).extend({
     larry: 'larry',
     navtab: 'navtab',
@@ -11,9 +11,9 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
     var $ = layui.jquery,
         layer = layui.layer,
         device = layui.device(),
-        elements = layui.elements(),
+        elements = layui.elements,
         larry = layui.larry(),
-        form = layui.form(),
+        form = layui.form,
         common = layui.common;
     navtab = layui.navtab({
         elem: '#larry-tab'
