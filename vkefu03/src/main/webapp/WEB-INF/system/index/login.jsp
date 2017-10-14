@@ -27,6 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="./plugin/layui/layui.js"></script>
     <script type="text/javascript" src="./js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="./plugin/jParticle/jparticle.jquery.js"></script>
+    <script type="text/javascript" src="./plugin/jquery/jquery.tips.js"></script>
     <!-- <script type="text/javascript" src="../common/js/larry-canvs.js"></script> -->
     <script type="text/javascript" src="js/login.js"></script>
 </head>

@@ -9,13 +9,14 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/system")
 public class LoginController {
 
 	@RequestMapping("/login")
 	@ResponseBody
-	public Object index(HttpServletRequest request){
+	public Object login(HttpServletRequest request){
 		//获取参数
 		String loginname = request.getParameter("loginname");
 		String password = request.getParameter("password");
@@ -33,11 +34,19 @@ public class LoginController {
 			}
 		}
 		if(!StringUtils.isBlank(code)){
-			if("bzzr".equals(code)){
+			if(!"bzzr".equals(code)){
 				errInfo="codeerror";
 			}
 		}
 		map.put("result", errInfo);
 		return map;
+	}
+	
+	@RequestMapping("/index")
+	public ModelAndView index(HttpServletRequest request){
+		//获取参数
+		 ModelAndView modelAndView = new ModelAndView();
+		 modelAndView.setViewName("system/index/index");
+		 return modelAndView;
 	}
 }

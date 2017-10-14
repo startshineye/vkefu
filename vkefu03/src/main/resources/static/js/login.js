@@ -28,16 +28,15 @@ layui.use(['jquery','layer','form'],function(){
 			cache: false,
 			success: function(data){
 				if("success" == data.result){
-					saveCookie();
-					window.location.href="index";
-				}else if("usererror" == data.result){
+					//saveCookie();
+					window.location.href="system/index";
+				}else if("loginerror" == data.result){
 					$("#loginname").tips({
 						side : 1,
 						msg : "用户名或密码有误",
 						bg : '#FF5080',
 						time : 15
 					});
-					showfh();
 					$("#loginname").focus();
 				}else if("codeerror" == data.result){
 					$("#code").tips({
@@ -46,7 +45,6 @@ layui.use(['jquery','layer','form'],function(){
 						bg : '#FF5080',
 						time : 15
 					});
-					showfh();
 					$("#code").focus();
 				}else{
 					$("#loginname").tips({
@@ -55,7 +53,6 @@ layui.use(['jquery','layer','form'],function(){
 						bg : '#FF5080',
 						time : 15
 					});
-					showfh();
 					$("#loginname").focus();
 				}
 			}
@@ -113,6 +110,4 @@ layui.use(['jquery','layer','form'],function(){
 			});
 			return true;
 		}
-    }
-
 });
