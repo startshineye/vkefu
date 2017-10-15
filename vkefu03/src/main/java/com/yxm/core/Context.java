@@ -1,6 +1,8 @@
 package com.yxm.core;
 
 public class Context {
+	
+	public static final String SESSION_USER = "sessionUser";				//session用的用户
   
 	public enum NameSpaceEnum{
 		IM("/im/user"),

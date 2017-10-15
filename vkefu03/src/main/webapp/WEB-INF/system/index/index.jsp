@@ -49,6 +49,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <!--</button>-->
                 <ul class="layui-nav clearfix">
                     <li class="layui-nav-item">
+                        <a id="im"><i class="larry-icon larry-diannao5"></i>在线客服</a>
+                    </li>
+                
+                    <li class="layui-nav-item">
                         <a class="onFullScreen" id="FullScreen"><i class="larry-icon larry-quanping"></i>全屏</a>
                     </li>
                     <li class="layui-nav-item">
@@ -156,6 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 加载js文件-->
 <script type="text/javascript" src="./plugin/layui/layui.js"></script> 
 <script type="text/javascript" src="js/larrycms.js"></script>
+<script type="text/javascript" src="js/im.js"></script>
 
 <!-- 主题配置  start-->
 <div class="larryThemeContent" id="LarryThemeSet" style="display:none;">
