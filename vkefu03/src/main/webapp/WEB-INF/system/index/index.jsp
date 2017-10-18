@@ -230,4 +230,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div>
 </div>
 </body>
+<script type="text/javascript">
+//页面一加载就执行
+var layinx , layerhelper ;
+$(document).ready(function(){
+   layui.use('layer',function(){
+     layerhelper=layer;
+     var imDialogHelper={
+        open:function(){
+          layinx=layer.open({
+            type:2,
+            title:false,
+            closeBtn:0,//不显示关闭按钮
+            shade: [0],
+            area: ["200px", "50px"],
+            offset: "rb", //右下角弹出
+            anim: 2,
+			shade: 0,
+			content: "/ent/im/point.html",
+            end:function(){
+				  layinx = layer.open({
+					  type: 2,
+					  title: false,
+					  closeBtn: 0, //不显示关闭按钮
+					  shade: [0],
+					  area: ["260px", "520px"],
+					  offset: "rb", //右下角弹出
+					  anim: 2,
+					  shade: 0,
+					  content: ["/ent/im/index.html", "no"], //iframe的url，no代表不显示滚动条
+					  end: function(){ //此处用于演示
+						  imDialogHelper.open();	  
+					  }
+				 });
+			  }
+          });
+        }
+     }
+     imDialogHelper.open();
+   });
+}
+
+function closeentim(){
+	if(layerhelper){
+		layerhelper.close(layinx);
+	}
+}
+</script>
 </html

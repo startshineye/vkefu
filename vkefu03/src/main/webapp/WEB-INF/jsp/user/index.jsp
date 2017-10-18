@@ -66,7 +66,6 @@ body {
     <div id="console" class="well"></div>
     <form class="well form-inline" onsubmit="return false;">
        <!--  <input id="name" class="input-xlarge" type="text" placeholder="用户名称. . . " /> -->
-       
         <input id="msg" class="input-xlarge" type="text" placeholder="发送内容. . . " />
         <button type="button" onclick="sendMessage();" class="btn">Send</button>
         <button type="button" onclick="sendDisconnect();" class="btn">Disconnect</button>
