@@ -158,6 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- layui-layout-admin end -->
 </div>
 <!-- 加载js文件-->
+<script type="text/javascript" src="./plugin/jquery/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="./plugin/layui/layui.js"></script> 
 <script type="text/javascript" src="js/larrycms.js"></script>
 <script type="text/javascript" src="js/im.js"></script>
@@ -269,8 +270,7 @@ $(document).ready(function(){
      }
      imDialogHelper.open();
    });
-}
-
+});
 function closeentim(){
 	if(layerhelper){
 		layerhelper.close(layinx);
