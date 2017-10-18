@@ -165,7 +165,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="./plugin/layui/layui.js"></script> 
 <script type="text/javascript" src="js/larrycms.js"></script>
 <script type="text/javascript" src="js/im.js"></script>
-
+<script type="text/javascript" src="plugin/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="plugin/kindeditor/lang/zh-CN.js"></script>
 <!-- 主题配置  start-->
 <div class="larryThemeContent" id="LarryThemeSet" style="display:none;">
     <div class="larry-theme-form">
