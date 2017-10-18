@@ -276,5 +276,20 @@ function closeentim(){
 		layerhelper.close(layinx);
 	}
 }
+
+function openchat(url , img , name, id , text){
+		top.layer.open({
+			  type: 2,
+			  id : id,
+			  title: ["<div style='position: relative;height: 42px;padding: 5px 15px 5px 0px;line-height: 20px;cursor: pointer;display: inline-block;vertical-align: top;' id='dialog_"+id+"'><img src='"+img+"' style='max-height:50px;'><div style='padding:0px 5px;line-height: 23px;display: inline-block;vertical-align: top;'><span style='vertical-align: top;font-size:18px;'>"+name+"<span class='ukefu-entim-status offline' id='chat_"+id+"' title='离线'><i class='layui-icon'></i></span></span><p style='vertical-align: top;font-size: 12px;color: #999;'>"+text+"</p></div></div>" , "height:55px"],
+			  closeBtn: 1, //不显示关闭按钮
+			  shade: false,
+			  area: ['700px', '520px'],
+			  maxmin: true, 
+			  anim: 2,
+			  shade: 0,
+			  content: url
+		  });
+}
 </script>
 </html
