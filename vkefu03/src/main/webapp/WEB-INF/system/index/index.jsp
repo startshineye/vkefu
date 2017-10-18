@@ -26,6 +26,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bmgv5kod196q1tt9.css">
 	<link rel="stylesheet" type="text/css" href="css/backstage.css" media="all">
 	
+	<!-- im -->
+	<link rel="stylesheet" type="text/css" href="css/im/entim.css">
+	<link rel="stylesheet" type="text/css" href="plugin/kindeditor/themes/simple/simple.css">
 	
 </head>
 <body>
