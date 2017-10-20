@@ -161,12 +161,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- layui-layout-admin end -->
 </div>
 <!-- 加载js文件-->
-<script type="text/javascript" src="./plugin/jquery/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="./plugin/layui/layui.js"></script> 
+<script type="text/javascript" src="plugin/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="plugin/layui/layui.js"></script> 
 <script type="text/javascript" src="js/larrycms.js"></script>
 <script type="text/javascript" src="js/im.js"></script>
 <script type="text/javascript" src="plugin/kindeditor/kindeditor-min.js"></script>
 <script type="text/javascript" src="plugin/kindeditor/lang/zh-CN.js"></script>
+<script type="text/javascript" src="js/socket.io.js"></script>
 <!-- 主题配置  start-->
 <div class="larryThemeContent" id="LarryThemeSet" style="display:none;">
     <div class="larry-theme-form">
