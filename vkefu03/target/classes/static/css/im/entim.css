@@ -1,11 +1,11 @@
-body{
+/* body{
 	overflow: hidden;
 	border:none;
-}
+} */
 img{
 	border:none;
 }
-html,body,.large{
+/* html,body,.large{
 	height: 100%;
 	font-size: 14px;
 	font-weight: 200;
@@ -13,7 +13,7 @@ html,body,.large{
 body {
     line-height: 24px;
     font: 15px \5FAE\8F6F\96C5\9ED1,Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
-}
+} */
 i, cite, em, var, address, dfn {
     font-style: initial;
 }

@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <!--</button>-->
                 <ul class="layui-nav clearfix">
                     <li class="layui-nav-item">
-                        <a id="im" href="javascript:openchat('/ent/im/chat.html' , '/images/user-pc.png' , '你好' , '1' , '最近登陆:');"><i class="larry-icon larry-diannao5"></i>在线客服</a>
+                        <a id="im" href="javascript:openchat('html/chat.html' , '/images/user-pc.png' , '你好' , '1' , '最近登陆:');"><i class="larry-icon larry-diannao5"></i>在线客服</a>
                     </li>
                 
                     <li class="layui-nav-item">
@@ -253,7 +253,7 @@ $(document).ready(function(){
             offset: "rb", //右下角弹出
             anim: 2,
 			shade: 0,
-			content: "/ent/im/point.html",
+			content: "html/point.html",
             end:function(){
 				  layinx = layer.open({
 					  type: 2,
@@ -264,7 +264,7 @@ $(document).ready(function(){
 					  offset: "rb", //右下角弹出
 					  anim: 2,
 					  shade: 0,
-					  content: ["/ent/im/index.html", "no"], //iframe的url，no代表不显示滚动条
+					  content: ["html/index.html", "no"], //iframe的url，no代表不显示滚动条
 					  end: function(){ //此处用于演示
 						  imDialogHelper.open();	  
 					  }
