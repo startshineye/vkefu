@@ -261,7 +261,7 @@ var sessionId ="${sessionId}";
 		var chat=document.getElementsByClassName('chatting-left').innerText;
 		chat = data.message;
 		if(data.calltype == "out"){
-			//output('<div class="chat-right"> <img class="user-img" src="/im/img/user.png" alt=""><div class="chat-message"><label class="time">'+data.createtime+'</label><label  class="user">${user.uname}</label> </div><div class="chatting-right"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");
+			output('<div class="chat-right"> <img class="user-img" src="/im/img/user.png" alt=""><div class="chat-message"><label class="time">'+data.createtime+'</label><label  class="user">'+data.agentid+'</label></div><div class="chatting-right"><i class="arrow"></i><div class="chat-content">'+data.message+'</div></div>' , "chat-block");
 		}else if(data.calltype == "in"){
 			//output('<div class="chat-left"> <img class="user-img" src="/im/img/user.png" alt=""><div class="chat-message"><label  class="user">${entimuser.uname}</label><label class="time">'+data.createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");	
 		}    

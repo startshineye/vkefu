@@ -63,7 +63,7 @@ public class IMEventHandler {
 	   
 	   //组装消息发送给用户端
 	   ChatMessage chatMessage = new ChatMessage();
-	   chatMessage.setName(message.getName());
+	   //chatMessage.setName(message.getName());
 	   chatMessage.setMessage(message.getMessage());
 	   
 	   //推送消息

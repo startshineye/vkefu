@@ -1,5 +1,6 @@
 package com.yxm.util.server.handler;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
+import com.yxm.util.DateUtil;
 import com.yxm.util.cache.ClientCache;
 import com.yxm.util.server.message.ChatMessage;
 public class AgentEventHandler{
@@ -38,11 +40,17 @@ public class AgentEventHandler{
 	@OnEvent(value="message")
 	public void onEvent(SocketIOClient client,ChatMessage message){
 		System.out.println("***message***"+client);
+		String time = DateUtil.datetimeFormat.format(new Date());
+		
+		//构造消息
 		ChatMessage chatMessage = new ChatMessage();
+		chatMessage.setAgentid(message.getAgentid());
+		chatMessage.setCalltype("out");
+		chatMessage.setCreatetime(time);
 		chatMessage.setMessage(message.getMessage());
-		for (String list : agentList) {
-			ClientCache.getInstance().setAgentEventMessage(list, "message", chatMessage);
-		}
+		
+		//发送
+		ClientCache.getInstance().setAgentEventMessage(message.getAgentid(), "message", chatMessage);
 		System.out.println("agent Onmessage [message:"+message+" sessionId:"+client.getSessionId().toString()+"]");
 	}
 	

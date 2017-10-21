@@ -11,9 +11,23 @@ public class ChatMessage {
     private String userid;
     private String sessionid;
     private String type;
+    private String calltype;
 	private String message;
+	private String createtime;
+	public String getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
 	public String getAgentid() {
 		return agentid;
+	}
+	public String getCalltype() {
+		return calltype;
+	}
+	public void setCalltype(String calltype) {
+		this.calltype = calltype;
 	}
 	public void setAgentid(String agentid) {
 		this.agentid = agentid;
@@ -45,7 +59,8 @@ public class ChatMessage {
 	@Override
 	public String toString() {
 		return "ChatMessage [agentid=" + agentid + ", userid=" + userid
-				+ ", sessionid=" + sessionid + ", type=" + type + ", message="
-				+ message + "]";
+				+ ", sessionid=" + sessionid + ", type=" + type + ", calltype="
+				+ calltype + ", message=" + message + ", createtime="
+				+ createtime + "]";
 	}
 }
