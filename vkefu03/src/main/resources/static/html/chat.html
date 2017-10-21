@@ -19,20 +19,19 @@
 	<link rel="stylesheet" type="text/css" href="../plugin/layui/css/layui.css" media="all">
 	<link rel="stylesheet" type="text/css" href="../css/common/global.css" media="all">
 	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bmgv5kod196q1tt9.css">
-	<link rel="stylesheet" type="text/css" href="css/backstage.css" media="all">
 	
 	<!-- im -->
 	<link rel="stylesheet" type="text/css" href="../css/im/entim.css">
 	<link rel="stylesheet" type="text/css" href="../plugin/kindeditor/themes/simple/simple.css">
+	<link rel="stylesheet" type="text/css" href="../css/backstage.css" media="all">
 	
 	<!-- 	加载js文件 -->
 	<script type="text/javascript" src="../plugin/jquery/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="../plugin/layui/layui.js"></script> 
-	<script type="text/javascript" src="js/larrycms.js"></script>
-	<script type="text/javascript" src="js/im.js"></script>
-	<script type="text/javascript" src="plugin/kindeditor/kindeditor-min.js"></script>
-	<script type="text/javascript" src="plugin/kindeditor/lang/zh-CN.js"></script>
-	
+	<script type="text/javascript" src="../js/larrycms.js"></script>
+	<script type="text/javascript" src="../js/im.js"></script>
+	<script type="text/javascript" src="../plugin/kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="../plugin/kindeditor/lang/zh-CN.js"></script>
 </head>
 <body>
 <div id="containter" class="clearfix" style="margin-right:200px;">
@@ -48,7 +47,7 @@
 			</div>
 			<!-- <#if chatMessageList?? && chatMessageList.content>
 			<#list chatMessageList.content?reverse as chatMessage>
-				<#if chatMessage.calltype == "out">
+				<#if chatMessage.calltype == "out"> -->
 					<div class="clearfix chat-block">
 						<div class="chat-right"> 
 							<img class="user-img" src="/im/img/user.png" alt="">
@@ -62,7 +61,7 @@
 							</div>
 						</div>
 					</div>
-				<#else>
+				<!-- <#else> -->
 					<div class="clearfix chat-block">
 						<div class="chat-left"> 
 							<img class="user-img" src="/im/img/user.png" alt="">
@@ -76,9 +75,9 @@
 							</div>
 						</div>
 					</div>
-				</#if>
-			</#list>
-			</#if> -->
+				<!-- </#if> -->
+		<!-- 	</#list>
+			</#if> --> 
 		</div>   
 		<div class="chat-bottom" id="bottom">
 			<textarea id="message" name="content" style="visibility:hidden;"></textarea>
@@ -97,18 +96,16 @@
 		<div class="content-list">
 			<ul>
 				<li>
-					<p>姓名：${entimuser.uname!''}</p>
-				</li>
-				<#if organ??>
-				<li>
-					<p>部门：${organ.name!''} </p>
-				</li>
-				</#if>
-				<li>
-					<p>邮件：${entimuser.email!''}</p>
+					<p>姓名：张三<!-- ${entimuser.uname!''} --></p>
 				</li>
 				<li>
-					<p>电话：${entimuser.mobile!''}</p>
+					<p>部门：呼叫中心<!-- ${organ.name!''} --> </p>
+				</li>
+				<li>
+					<p>邮件：yxm@qq.com<!-- ${entimuser.email!''} --></p>
+				</li>
+				<li>
+					<p>电话：13001955858<!-- ${entimuser.mobile!''} --></p>
 				</li>
 			</ul>
 		</div>
