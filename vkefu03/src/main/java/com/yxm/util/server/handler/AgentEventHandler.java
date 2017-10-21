@@ -39,9 +39,7 @@ public class AgentEventHandler{
 	public void onEvent(SocketIOClient client,ChatMessage message){
 		System.out.println("***message***"+client);
 		ChatMessage chatMessage = new ChatMessage();
-		chatMessage.setName(message.getName());
-		   chatMessage.setMessage(message.getMessage());
-		
+		chatMessage.setMessage(message.getMessage());
 		for (String list : agentList) {
 			ClientCache.getInstance().setAgentEventMessage(list, "message", chatMessage);
 		}

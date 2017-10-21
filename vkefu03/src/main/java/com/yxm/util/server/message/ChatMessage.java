@@ -7,23 +7,45 @@ package com.yxm.util.server.message;
  * 
  */
 public class ChatMessage {
-	private String name;
+	private String agentid;
+    private String userid;
+    private String sessionid;
+    private String type;
 	private String message;
-	 
+	public String getAgentid() {
+		return agentid;
+	}
+	public void setAgentid(String agentid) {
+		this.agentid = agentid;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getSessionid() {
+		return sessionid;
+	}
+	public void setSessionid(String sessionid) {
+		this.sessionid = sessionid;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getMessage() {
 		return message;
 	}
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	@Override
 	public String toString() {
-		return "ChatMessage [name=" + name + ", message=" + message + "]";
+		return "ChatMessage [agentid=" + agentid + ", userid=" + userid
+				+ ", sessionid=" + sessionid + ", type=" + type + ", message="
+				+ message + "]";
 	}
 }

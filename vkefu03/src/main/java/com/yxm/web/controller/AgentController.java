@@ -18,7 +18,24 @@ public class AgentController {
 		String agentId = "1101";
 		String agentName = "yxm";
 		ModelAndView model = new ModelAndView();
-		model.setViewName("agent/index");
+		model.setViewName("im/agent/index");
+		model.addObject("sessionId",sessionId);
+		model.addObject("agentId",agentId);
+		model.addObject("agentName",agentName);
+		model.addObject("hostName", request.getServerName());
+		model.addObject("port", request.getServerPort());
+		model.addObject("schema", request.getScheme()) ;
+		System.out.println("agentId:"+agentId+" agentName:"+agentName+" session:"+sessionId);
+		return model;
+   }
+   
+   @RequestMapping("/chat")
+   public ModelAndView chat(HttpServletRequest request){
+	   String sessionId = request.getSession().getId();
+		String agentId = "1101";
+		String agentName = "yxm";
+		ModelAndView model = new ModelAndView();
+		model.setViewName("im/agent/chat");
 		model.addObject("sessionId",sessionId);
 		model.addObject("agentId",agentId);
 		model.addObject("agentName",agentName);

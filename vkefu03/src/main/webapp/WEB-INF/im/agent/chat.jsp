@@ -1,8 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
-    <base href="<%=basePath%>">
-    <meta charset="UTF-8">
+<base href="<%=basePath%>">
+ <meta charset="UTF-8">
     <title>在线客服平台</title>
 	<meta name="keywords" content="LarryCMS后台登录界面" />
     <meta name="description" content="LarryCMS Version:1.09" />
@@ -16,22 +21,22 @@
 	<link rel="Shortcut Icon" href="/favicon.ico" />
 	
     <!-- 加载css -->
-	<link rel="stylesheet" type="text/css" href="../plugin/layui/css/layui.css" media="all">
-	<link rel="stylesheet" type="text/css" href="../css/common/global.css" media="all">
+	<link rel="stylesheet" type="text/css" href="plugin/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/common/global.css" media="all">
 	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_bmgv5kod196q1tt9.css">
 	
 	<!-- im -->
-	<link rel="stylesheet" type="text/css" href="../css/im/entim.css">
-	<link rel="stylesheet" type="text/css" href="../plugin/kindeditor/themes/simple/simple.css">
-	<link rel="stylesheet" type="text/css" href="../css/backstage.css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/im/entim.css">
+	<link rel="stylesheet" type="text/css" href="plugin/kindeditor/themes/simple/simple.css">
+	<link rel="stylesheet" type="text/css" href="css/backstage.css" media="all">
 	
 	<!-- 	加载js文件 -->
-	<script type="text/javascript" src="../plugin/jquery/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="../plugin/layui/layui.js"></script> 
-	<script type="text/javascript" src="../js/larrycms.js"></script>
-	<script type="text/javascript" src="../js/im.js"></script>
-	<script type="text/javascript" src="../plugin/kindeditor/kindeditor-min.js"></script>
-	<script type="text/javascript" src="../plugin/kindeditor/lang/zh-CN.js"></script>
+	<script type="text/javascript" src="plugin/jquery/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="plugin/layui/layui.js"></script> 
+	<script type="text/javascript" src="js/im.js"></script>
+	<script type="text/javascript" src="plugin/kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="plugin/kindeditor/lang/zh-CN.js"></script>
+	<script type="text/javascript" src="js/socket.io.js"></script>
 </head>
 <body>
 <div id="containter" class="clearfix" style="margin-right:200px;">
@@ -45,9 +50,6 @@
 					</a>
 				</span>
 			</div>
-			<!-- <#if chatMessageList?? && chatMessageList.content>
-			<#list chatMessageList.content?reverse as chatMessage>
-				<#if chatMessage.calltype == "out"> -->
 					<div class="clearfix chat-block">
 					<!-- 坐席部分 -->
 						<div class="chat-right"> 
@@ -62,7 +64,6 @@
 							</div>
 						</div>
 					</div>
-				<!-- <#else> -->
 					<div class="clearfix chat-block">
 					<!-- 用户部分 -->
 						<div class="chat-left"> 
@@ -77,9 +78,6 @@
 							</div>
 						</div>
 					</div>
-				<!-- </#if> -->
-		<!-- 	</#list>
-			</#if> --> 
 		</div>   
 		<div class="chat-bottom" id="bottom">
 			<textarea id="message" name="content" style="visibility:hidden;"></textarea>
@@ -98,16 +96,16 @@
 		<div class="content-list">
 			<ul>
 				<li>
-					<p>姓名：张三<!-- ${entimuser.uname!''} --></p>
+					<p>姓名：张三</p>
 				</li>
 				<li>
-					<p>部门：呼叫中心<!-- ${organ.name!''} --> </p>
+					<p>部门：呼叫中心</p>
 				</li>
 				<li>
-					<p>邮件：yxm@qq.com<!-- ${entimuser.email!''} --></p>
+					<p>邮件：yxm@qq.com</p>
 				</li>
 				<li>
-					<p>电话：13001955858<!-- ${entimuser.mobile!''} --></p>
+					<p>电话：13001955858</p>
 				</li>
 			</ul>
 		</div>
@@ -121,7 +119,7 @@
 		</div>
 	</div>
 </div>
-<!-- </body> -->
+</body>
 <script type="text/javascript">
 	var editor , words;
 	KindEditor.ready(function (K) {
@@ -250,20 +248,22 @@
 	}
 </script>
 <script>
+var agentId = "${agentId}";
+var agentName = "${agentName}";
+var sessionId ="${sessionId}";
 	layui.use('element', function(){
 	  var $ = layui.jquery
-	  ,element = layui.element(); //Tab的切换功能，切换事件监听等，需要依赖element模块
+	  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 	});
 	var hostname = location.hostname ;
-	//var socket = io.connect("http://"+top.hostname+":"+top.port+"/im/ent?userid=${user.id!''!''}&orgi=${user.orgi!''}&contextid=${contextid!''}");
 	var socket = io.connect('http://localhost:8078/im/agent?agentId='+agentId+'&agentName='+agentName+'&sessionId='+sessionId+'');
 	socket.on('message', function(data) {
 		var chat=document.getElementsByClassName('chatting-left').innerText;
 		chat = data.message;
 		if(data.calltype == "out"){
-			//output('<div class="chat-right"> <img class="user-img" src="/im/img/user.png" alt=""><div class="chat-message"><label class="time">'+data.createtime+'</label><label  class="user">${user.uname!''}</label> </div><div class="chatting-right"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");
+			//output('<div class="chat-right"> <img class="user-img" src="/im/img/user.png" alt=""><div class="chat-message"><label class="time">'+data.createtime+'</label><label  class="user">${user.uname}</label> </div><div class="chatting-right"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");
 		}else if(data.calltype == "in"){
-			//output('<div class="chat-left"> <img class="user-img" src="/im/img/user.png" alt=""><div class="chat-message"><label  class="user">${entimuser.uname!''}</label><label class="time">'+data.createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");	
+			//output('<div class="chat-left"> <img class="user-img" src="/im/img/user.png" alt=""><div class="chat-message"><label  class="user">${entimuser.uname}</label><label class="time">'+data.createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");	
 		}    
 	});
 	socket.on('status',function(data){
@@ -282,12 +282,10 @@
 		var message = document.getElementById('message').value;
 			if(message!= ""){ 
 				socket.emit('message', {
-					userid:"${user.id!''}",
+					agentid:agentId,
 					type:"message" ,
-					session:"${user.id!''}",
-					touser:"${entimuser.id!''}",
-					contextid:"${user.id!''}",
-					orgi:"${user.orgi!''}",
+					sessionid:sessionId,
+					userid:"",
 					message : message
 				});
 			}
@@ -311,4 +309,4 @@
 	top.$('#chat_${entimuser.id}').removeClass('offline').addClass('online').attr('title' , '在线');
 	</#if> */
 </script>
-<!-- </html> -->
+</html>

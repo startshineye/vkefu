@@ -49,29 +49,31 @@
 			<#list chatMessageList.content?reverse as chatMessage>
 				<#if chatMessage.calltype == "out"> -->
 					<div class="clearfix chat-block">
+					<!-- 坐席部分 -->
 						<div class="chat-right"> 
 							<img class="user-img" src="/im/img/user.png" alt="">
 							<div class="chat-message">
-								<label class="time">${chatMessage.createtime!''}</label>
-								<label class="user">${user.uname!''}</label> 
+								<label class="time">2017-10-21 19:18:13</label>
+								<label class="user">坐席1101</label> 
 							</div>
 							<div class="chatting-right">
 								<i class="arrow"></i>
-								<div class="chat-content">${(chatMessage.message!'')?no_esc}</div>
+								<div class="chat-content">请问,有什么为你服务?</div>
 							</div>
 						</div>
 					</div>
 				<!-- <#else> -->
 					<div class="clearfix chat-block">
+					<!-- 用户部分 -->
 						<div class="chat-left"> 
 							<img class="user-img" src="/im/img/user.png" alt="">
 							<div class="chat-message">
-								<label class="user">${entimuser.uname!''}</label> 						
-								<label class="time">${chatMessage.createtime!''}</label>
+								<label class="user">访客1</label> 						
+								<label class="time">2017-10-21 19:18:20</label>
 							</div>
 							<div class="chatting-left">
 								<i class="arrow"></i>
-								<div class="chat-content">${(chatMessage.message!'')?no_esc}</div>
+								<div class="chat-content">系统怎么用?</div>
 							</div>
 						</div>
 					</div>
@@ -253,7 +255,8 @@
 	  ,element = layui.element(); //Tab的切换功能，切换事件监听等，需要依赖element模块
 	});
 	var hostname = location.hostname ;
-	var socket = io.connect("http://"+top.hostname+":"+top.port+"/im/ent?userid=${user.id!''!''}&orgi=${user.orgi!''}&contextid=${contextid!''}");
+	//var socket = io.connect("http://"+top.hostname+":"+top.port+"/im/ent?userid=${user.id!''!''}&orgi=${user.orgi!''}&contextid=${contextid!''}");
+	var socket = io.connect('http://localhost:8078/im/agent?agentId='+agentId+'&agentName='+agentName+'&sessionId='+sessionId+'');
 	socket.on('message', function(data) {
 		var chat=document.getElementsByClassName('chatting-left').innerText;
 		chat = data.message;

@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <!--</button>-->
                 <ul class="layui-nav clearfix">
                     <li class="layui-nav-item">
-                        <a id="im" href="javascript:openchat('html/chat.html' , '/images/user-pc.png' , '你好' , '1' , '最近登陆:');"><i class="larry-icon larry-diannao5"></i>在线客服</a>
+                        <a id="im" href="javascript:openchat('agent/chat.do' , '/images/user-pc.png' , '你好' , '1' , '最近登陆:');"><i class="larry-icon larry-diannao5"></i>在线客服</a>
                     </li>
                 
                     <li class="layui-nav-item">
