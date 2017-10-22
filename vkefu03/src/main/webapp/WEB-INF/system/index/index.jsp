@@ -95,6 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    </div>
                    <p>admin您好！欢迎登录</p>
               </div>-->
+              
               <!-- 系统菜单 -->
               <div class="sys-menu-box" >
                    <ul class="layui-nav layui-nav-tree" id="larrySideNav" lay-filter="side" >
@@ -239,7 +240,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 //页面一加载就执行
 var layinx , layerhelper ;
-$(document).ready(function(){
+/* $(document).ready(function(){
    layui.use('layer',function(){
      layerhelper=layer;
      var imDialogHelper={
@@ -275,7 +276,7 @@ $(document).ready(function(){
      }
      imDialogHelper.open();
    });
-});
+}); */
 function closeentim(){
 	if(layerhelper){
 		layerhelper.close(layinx);

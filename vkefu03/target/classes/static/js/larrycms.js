@@ -29,7 +29,7 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
         if (device.ie && device.ie < 9) {
             layer.alert('最低支持ie9，您当前使用的是古老的 IE' + device.ie + '！');
         }
-        // 001界面初始化
+        //001界面初始化
         AdminInit();
         //绑定导航数据
         /*$.ajaxSettings.async = false;
@@ -64,7 +64,14 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
 			"title": "扩展模块",
 			"icon": "larry-ht_expand",
 			"pid": "46"
+		  },
+		  /*********************yxm start***************************/
+		  {
+			  "title":"在线客服管理",
+			  "icon":"",
+			  "pid":"50"
 		  }
+		  /*********************yxm end***************************/
 		]
 		larry.set({
 			elem: '#menu',
@@ -101,6 +108,10 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
 				var pid_35 = [{"title":"网站管理","icon":"larry-30wangzhanguanli","spread":"true","children":[{"title":"网站栏目管理","icon":"larry-lanmuguanli","href":"html/temp.html"},{"title":"所有文章列表","icon":"larry-iconfontfilesfill","href":"html/temp.html"},{"title":"待审核的文章","icon":"larry-daishenhe1","href":"html/temp.html"},{"title":"我发布的文章","icon":"larry-fabu2","href":"html/temp.html"},{"title":"Tags管理","icon":"larry-tags","href":"html/temp.html"},{"title":"内容回收站","icon":"larry-iconfonthuishouzhan","href":"html/temp.html"}]},{"title":"模型管理","icon":"larry-moxingguanli","spread":"true","children":[{"title":"内容模型管理","icon":"larry-moxing1","href":"html/temp.html"},{"title":"单页文档管理","icon":"larry-danye","href":"html/temp.html"},{"title":"联动类别管理","icon":"larry-liandong","href":"html/temp.html"},{"title":"自由列表管理","icon":"larry-zidingyicaidan1","href":"html/temp.html"},{"title":"自定义表单","icon":"larry-iconzidingyibiaodan","href":"html/temp.html"}]},{"title":"附件管理","icon":"larry-fujianguanli","spread":"true","children":[{"title":"上传新文件","icon":"larry-shangchuanfujian","href":"html/temp.html"},{"title":"附件数据管理","icon":"larry-fujian","href":"html/temp.html"},{"title":"文件管理器","icon":"larry-wenjianguanli2","href":"html/temp.html"}]},{"title":"采集管理","icon":"larry-eee","spread":"true","children":[{"title":"采集节点管理","icon":"larry-shujucaiji","href":"html/temp.html"},{"title":"临时内容管理","icon":"larry-linshi1","href":"html/temp.html"},{"title":"导入采集规则","icon":"larry-guize","href":"html/temp.html"},{"title":"监控采集模式","icon":"larry-jiankong1","href":"html/temp.html"},{"title":"采集未下载内容","icon":"larry-xiazai2","href":"html/temp.html"}]},{"title":"广告管理","icon":"larry-iconguanggaoguanli","spread":"true","children":[{"title":"自定义广告","icon":"larry-zidingyiguanggaolan","href":"html/temp.html"},{"title":"网盟广告","icon":"larry-guanggaolianmeng","href":"html/temp.html"}]},{"title":"批量维护","icon":"larry-piliang","spread":"true","children":[{"title":"一键更新网站","icon":"larry-yijian","href":"html/temp.html"},{"title":"更新系统缓存","icon":"larry-xitonghuancun","href":"html/temp.html"},{"title":"更新主页HTML","icon":"larry-tubiaozitimoban","href":"html/temp.html"},{"title":"更新栏目HTML","icon":"larry-lanmu1","href":"html/temp.html"},{"title":"更新文档HTML","icon":"larry-wendang","href":"html/temp.html"},{"title":"更新网站地图","icon":"larry-wangzhanditu","href":"html/temp.html"},{"title":"重复文档检测","icon":"larry-zhongfu","href":"html/temp.html"},{"title":"数据库内容替换","icon":"larry-tihuan1","href":"html/temp.html"},{"title":"自动摘要","icon":"larry-zhaiyao","href":"html/temp.html"},{"title":"搜索关键词维护","icon":"larry-guanjianci","href":"html/temp.html"}]}]
 				var pid_40= [{"title":"微信配置","icon":"larry-weixinguanli","spread":"true","children":[{"title":"微信接口设置","icon":"larry-api1","href":"html/temp.html"},{"title":"微信支付配置","icon":"larry-iconzfb","href":"html/temp.html"}]}]
 				var pid_46= [{"title":"支付宝支付配置","icon":"larry-zhifubao","href":"html/temp.html"}]
+				/*************************yxm  start*************************/
+				var pid_50=[{"title":"系统设置","icon":"","href":"html/temp.html"},{"title":"客服接入","icon":"","href":"html/temp.html"},{"title":"微信接入","icon":"","href":"html/temp.html"}]
+				
+				/*************************yxm  end*************************/
 				var result;
 				if(id == 0)
 					result = pid_0;
@@ -110,6 +121,12 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
 					result = pid_40;
 				if(id == 46)
 					result = pid_46;
+				
+				/******************yxm start**********************/
+				if(id==50){
+					result = pid_50;
+				}
+				/******************yxm end**********************/
 
 				larry.set({
 					elem: '#larrySideNav',

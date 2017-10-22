@@ -17,7 +17,7 @@ public class ChatMessage {
 	public String getCreatetime() {
 		return createtime;
 	}
-	public void setCreatetime(String createtime) {
+	public void setCreatetime(String createtime){
 		this.createtime = createtime;
 	}
 	public String getAgentid() {
