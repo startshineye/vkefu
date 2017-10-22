@@ -110,7 +110,7 @@ layui.use(['elements', 'jquery', 'layer', 'larry', 'navtab', 'form', 'common'], 
 				//var pid_46= [{"title":"支付宝支付配置","icon":"larry-zhifubao","href":"html/temp.html"}]
 				var pid_46= [{"title":"支付宝支付配置","icon":"larry-zhifubao","href":"html/temp.html"}]
 				/*************************yxm  start*************************/
-				var pid_50=[{"title":"系统设置","icon":"","href":"html/temp.html"},{"title":"客服接入","icon":"","spread":"true","children":[{"title":"网页接入","icon":"web","href":"html/im/index.html"}]},{"title":"客服接入","icon":"","spread":"true","children":[{"title":"微信接入","icon":"wechat","href":"html/temp.html"}]}]
+				var pid_50=[{"title":"系统设置","icon":"","href":"html/temp.html"},{"title":"客服接入","icon":"","spread":"true","children":[{"title":"网页接入","icon":"web","href":"html/im/index.html"}]},{"title":"微信接入","icon":"","spread":"true","children":[{"title":"公众号设置","icon":"wechat","href":"html/temp.html"}]}]
 				//var pid_50= [{"title":"微信配置","icon":"larry-weixinguanli","spread":"true","children":[{"title":"微信接口设置","icon":"larry-api1","href":"html/temp.html"},{"title":"微信支付配置","icon":"larry-iconzfb","href":"html/temp.html"}]}]
 				/*************************yxm  end*************************/
 				var result;
