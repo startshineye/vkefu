@@ -212,7 +212,7 @@ layui.define(['jquery', 'layer', 'element', 'common'], function (exports) {
      * @param     {[type]}                 data [获取Html字符串]
      * @return    {[type]}                      [返回Html字符串]
      */
-    function getHtml(data) {
+    function getHtml(data){
         var ulHtml = '';
         for (var i = 0; i < data.length; i++) {
             if (data[i].pid !== false && data[i].pid !== 'undefined') {

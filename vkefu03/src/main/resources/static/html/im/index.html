@@ -1,0 +1,161 @@
+<form method="post" key="set-mine" enctype="multipart/form-data" action="/admin/webim/save.html" class="layui-form">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ukefu-customer-div setting-wrapper">
+				<div class="box default-box">
+					<div class="box-header">
+						<h3 class="box-title">接入代码</h3>
+					</div>
+					<div class="box-body">
+						<div class="ukefu-webim-tip">请将以下代码添加到你的网站 HTML
+							源代码中，放在&lt;head&gt;&lt;/head&gt;标签之间.</div>
+						<textarea class="ukefu-webim-sdk" readonly="readonly"></textarea>
+	
+					</div>
+				</div>
+				<div class="box default-box">
+					<div class="box-header">
+						<h3 class="box-title">文字链代码</h3>
+					</div>
+					<div class="box-body" style="padding-top:5px;">
+						<div class="layui-tab layui-tab-card">
+						  <ul class="layui-tab-title">
+						    <li class="layui-this">文字链代码</li>
+						    <!-- <#if skillList??  && inviteData?? && inviteData.skill == true>
+						    <#list skillList as skill>
+						    <li>${skill.name!''}</li>
+						    </#list>
+						    </#if> -->
+						  </ul>
+						  <div class="layui-tab-content">
+						    <div class="layui-tab-item layui-show">
+						    	<div class="ukefu-webim-tip">请将以下代码添加到你的网站 链接代码上，可以自由定义链接的内容形式</div>
+								<textarea class="ukefu-webim-sdk" readonly="readonly"></textarea>
+						    </div>
+						  <!--   <#if skillList??  && inviteData?? && inviteData.skill == true>
+						    <#list skillList as skill>
+						    <div class="layui-tab-item">
+						    	<div class="ukefu-webim-tip">技能组“${skill.name!''}”文字连接，你可以复制此链接，并可以自由定义链接的内容形式</div>
+						    	<div class="ukefu-webim-tip">
+						    		<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+									  <ul class="layui-tab-title">
+									    <li class="layui-this">${skill.name!''}</li>
+									    <#if agentList?? && agentList.content??>
+									    <#list agentList.content as agent>
+									    <#if agent.organ?? && agent.organ == skill.id>
+									    <li title="${agent.uname!''}">${agent.username!''}</li>
+									    </#if>
+									    </#list>
+									    </#if>
+									  </ul>
+									  <div class="layui-tab-content">
+									  	<div class="layui-tab-item layui-show">
+									  		<textarea class="ukefu-webim-sdk" readonly="readonly"><#if inviteData??>${schema!''}://${hostname!''}:${import?string('###')}/im/text/${inviteData.id!''}.html?skill=${skill.id!''}<#else></#if></textarea>
+									  	</div>
+									  	<#if agentList?? && agentList.content??>
+									    <#list agentList.content as agent>
+									    <#if agent.organ?? && agent.organ == skill.id>
+									    <div class="layui-tab-item ">
+									  		<textarea class="ukefu-webim-sdk" readonly="readonly"><#if inviteData??>${schema!''}://${hostname!''}:${import?string('###')}/im/text/${inviteData.id!''}.html?skill=${skill.id!''}&agent=${agent.id!''}<#else></#if></textarea>
+									  	</div>
+									    </#if>
+									    </#list>
+									    </#if>
+									  </div>
+									</div>    
+						    	</div>
+								
+						    </div>
+						    </#list>
+						    </#if> -->
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="row">
+		<div class="col-lg-3"></div>
+		<div class="col-lg-9">
+			<div class="layui-form-item">
+	          <div class="layui-input-block">
+	            <button class="layui-btn" lay-submit="" lay-filter="formDemo">保存</button>
+	            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+	          </div>
+	        </div>
+		</div>
+	</div> -->
+</form>
+<script language="javascript"> 		
+	layui.use('upload', function(){
+		var target = $(this).attr("data-target");
+	});
+	layui.use('form', function(){
+		var form = layui.form();
+		form.render('select'); //刷新select选择框渲染
+	});
+			
+	$(document)
+			.ready(
+					function() {
+						$('.ukefu-im-dialog .ukefu-im-item')
+								.click(
+										function() {
+											var theme = $(this).attr(
+													'data-class');
+											$('#pv .ukefu-theme-color')
+													.each(
+															function() {
+																$(this)
+																		.removeClass(
+																				"theme1 theme2 theme3 theme4 theme5 theme6")
+																		.addClass(
+																				theme);
+															});
+											$('.ukefu-im-dialog .ukefu-im-item')
+													.removeClass(
+															'ukefu-im-checked');
+											$(this).addClass('ukefu-im-checked');
+											$('#consult_dialog_color').val($(this).attr('data-value'));
+										});
+						$('.ukefu-im-ping-color .ukefu-im-item')
+								.click(
+										function() {
+											var theme = $(this).attr(
+													'data-class');
+											$('#ukefu-point .ukefu-theme-color')
+													.each(
+															function() {
+																$(this)
+																		.removeClass(
+																				"theme1 theme2 theme3 theme4 theme5 theme6")
+																		.addClass(
+																				theme);
+															});
+											$('.ukefu-im-ping-color .ukefu-im-item')
+													.removeClass(
+															'ukefu-im-checked');
+											$(this).addClass('ukefu-im-checked');
+											$('#consult_vsitorbtn_color').val($(this).attr('data-value'));
+										});
+						$('.ukefu-im-point')
+								.click(
+										function() {
+											$("#ukefu-point-theme")
+													.removeClass(
+															"ukefu-point-theme1 ukefu-point-theme2 ukefu-point-theme3")
+													.addClass(
+															$(this)
+																	.attr(
+																			'data-class'));
+											$('.ukefu-im-point').removeClass(
+													"ukefu-point-checked");
+											$(this)
+													.addClass(
+															"ukefu-point-checked");
+											$('#consult_vsitorbtn_model').val($(this).attr('data-value'));
+										});
+					});
+</script>
+
