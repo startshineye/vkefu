@@ -19,7 +19,7 @@ public class IMController {
 		String userName = "Guest_"+userId;
 		
 		ModelAndView model = new ModelAndView();
-		model.setViewName("user/index");
+		model.setViewName("im/user/index");
 		model.addObject("sessionId",sessionId);
 		model.addObject("userId",userId);
 		model.addObject("userName",userName);

@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 themeType: 'simple',
                 fontsize: 16,
 				newlineTag : "br" , 
-				uploadJson : "/im/image/upload.html?userid=${userid!''}",
+				uploadJson : "/im/image/upload.html?userId="+userId,
                 allowFileManager : false,
                 allowInsertUpload:false,		//增加的参数，上传图片后是否插入到当前区域
                 allowImageRemote:false,
@@ -70,11 +70,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 					if(words != this.count("text")){
 						socket.emit('message', {
-								appid : "${appid!''}",
-								userid:"${userid!''}",
+								appid : "",
+								userid:"",
 								type:"writing",
-								session:"${sessionid!''}",
-								orgi:"${orgi!''}",
+								session:"",
+								orgi:"",
 								message : strValue
 						});
 					}
@@ -195,10 +195,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- kindeditor -->
 </head>
 <body style="overflow:hidden;" class="ukefu-point-text">
-<div class="large ukefu-im-theme <#if type?? && type='text'>ukefu-theme-border-${inviteData.consult_dialog_color!''}</#if>">
+<div class="large ukefu-im-theme">
     <div id="containter" class="clearfix">
-    	<div id="header" class="theme${inviteData.consult_dialog_color!''}">
-	   		<img src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image.html?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>" style="height:30px;padding:10px;">
+    	<div id="header" class="theme">
+	   		<img src="" style="height:30px;padding:10px;">
 	   		<div class="ukefu-func-tab">
 		   		<ul>
 		   		</ul>
@@ -215,18 +215,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<label class="user"></label> 
 									</div>
 									<div class="chatting-right">
-										<i class="arrow arrow${inviteData.consult_dialog_color!''}"></i>
-										<div class="chat-content theme${inviteData.consult_dialog_color!''}"><#include "/apps/im/media/message.html"></div>
+										<i class="arrow arrow"></i>
+										<div class="chat-content theme"></div>
 									</div>
 								</div>
 							</div>
 					 
 							<div class="clearfix chat-block">
 								<div class="chat-left"> 
-									<img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image.html?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt="">
+									<img class="user-img" src="/images/agent.png" alt="">
 									<div class="chat-message">
-										<label class="user">${chatMessage.username!''}</label> 
-										<label class="time">${chatMessage.createtime!''}</label>										
+										<label class="user"></label> 
+										<label class="time"></label>										
 									</div>
 									<div class="chatting-left">
 										<i class="arrow"></i>
@@ -251,35 +251,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                <p>信息提示</p>
 	            </div>
                 <ul>
-                	<#if inviteData.dialog_name?? && inviteData.dialog_name != "">
                     <li>
-                        <p>名称：${inviteData.dialog_name!''}</p>
+                        <p>名称:</p>
                     </li>
-                    </#if>
-                    <#if inviteData.dialog_address?? && inviteData.dialog_address != "">
                     <li>
-                        <p>地址：${inviteData.dialog_address!''}</p>
+                        <p>地址：</p>
                     </li>
-                    </#if>
-                    <#if inviteData.dialog_phone?? && inviteData.dialog_phone != "">
                     <li>
-                        <p>电话：${inviteData.dialog_phone!''}</p>
+                        <p>电话:</p>
                     </li>
-                    </#if>
-                    <#if inviteData.dialog_mail?? && inviteData.dialog_mail != "">
                     <li>
-                        <p>邮件：${inviteData.dialog_mail!''}</p>
+                        <p>邮件:</p>
                     </li>
-                    </#if>
-                    <#if inviteData.dialog_mail?? && inviteData.dialog_introduction != "">
                     <li>
-                        <p style="text-indent:25px;line-height:25px;">${(inviteData.dialog_introduction!'')?no_esc}</p>
+                        <p style="text-indent:25px;line-height:25px;"></p>
                     </li>
-                    </#if>
                 </ul>
             </div>
             <div class="content-pic" style="width:100%;height:192px;">
-                <img src="/res/image.html?id=${inviteData.dialog_ad!''}" style="height:190px;width:100%;">
+                <img src="" style="height:190px;width:100%;">
             </div>
         </div>
     </div>
@@ -322,6 +312,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </div>
 <script>
+  //定义变量
+ var userId ="${userId}";
+ var hostName="${hostName}";
+ var port="${port}";
+ var schema="${schema}";
+ var userName = "${userName}";
+ var sessionId="${sessionId}";
 	var service_end = false ;
 	R3Helper.resize();
     // 调查问卷
@@ -334,7 +331,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     document.getElementById('above').scrollTop = document.getElementById('above').scrollHeight  ;	//滚动到 对话内容的 底部
     // 参数连接
 	var hostname = location.hostname ;
-    var socket = io.connect('${schema!'http'}://'+hostname+':${port}/im/user?userid=${userid!''}&orgi=${orgi!''}&session=${sessionid!''}&appid=${appid!''}&osname=${(osname!'')?url}&browser=${(browser!'')?url}<#if skill??>&skill=${skill}</#if><#if username??>&nickname=${username}</#if><#if agent??>&agent=${agent}</#if>');
+    var socket = io.connect('http://localhost:8078/im/user?userId='+userId+'&userName='+userName+'&sessionId='+sessionId+'');
     socket.on('connect',function(){
         //service.sendRequestMessage(); 
 		//output('<span id="connect-message">'+ new Date().format("yyyy-MM-dd hh:mm:ss") + ' 开始沟通' +'</span>' , 'message connect-message');	 		
@@ -356,9 +353,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	chat = "<a href='"+data.message+"_original' target='_blank'><img src='"+data.message+"' class='ukefu-media-image'/></a>" ;
         }
 		if(data.calltype == "in"){
-			output('<div class="chat-right"> <img class="user-img" src="/im/img/user.png" alt=""><div class="chat-message"><label class="time">'+data.createtime+'</label><label  class="user">'+data.nickName+'</label> </div><div class="chatting-right"><i class="arrow arrow${inviteData.consult_dialog_color!''}"></i><div class="chat-content theme${inviteData.consult_dialog_color!''}">'+chat+'</div></div>' , "chat-block");
+			output('<div class="chat-right"> <img class="user-img" src="/im/img/user.png" alt=""><div class="chat-message"><label class="time">'+data.createtime+'</label><label  class="user">'+data.nickName+'</label> </div><div class="chatting-right"><i class="arrow arrow"></i><div class="chat-content theme">'+chat+'</div></div>' , "chat-block");
 		}else if(data.calltype == "out"){
-			output('<div class="chat-left"> <img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image.html?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt=""><div class="chat-message"><label  class="user">'+data.nickName+'</label><label class="time">'+data.createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");	
+			output('<div class="chat-left"> <img class="user-img" src="" alt=""><div class="chat-message"><label  class="user">'+data.nickName+'</label><label class="time">'+data.createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");	
 		}
     });
     
@@ -375,12 +372,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        var message = document.getElementById('message').value;
 	        if(message!= ""){ 
 				socket.emit('message', {
-						appid : "${appid!''}",
-						userid:"${userid!''}",
-						type:"message" ,
-						session:"${sessionid!''}",
-						orgi:"${orgi!''}",
-						message : message
+					agentid:agentId,
+					type:"message" ,
+					sessionid:sessionId,
+					userid:userId,
+					message : message
 				});
 			}
 		}else if(service_end == true){
