@@ -201,27 +201,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   		<img src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image.html?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>" style="height:30px;padding:10px;">
 	   		<div class="ukefu-func-tab">
 		   		<ul>
-		   			<#if models?? && models["xiaoe"]?? && models["xiaoe"] == true && inviteData.ai>
-		   				<li><a href="/im/index.html?appid=${appid!''}&orgi=${orgi!''}&ai=true<#if client??>&client=${client!''}</#if><#if type??>&type=text</#if><#if skill??>&skill=${skill!''}</#if><#if agent??>&agent=${agent!''}</#if>&userid=${userid!''}&sessionid=${sessionid!''}&t=${.now?long}">智能客服</a></li>
-		   				<li class="cur"><a href="javascript:void(0)">人工坐席</a></li>
-		   			<#else>
-		   				<li class="cur"><a href="javascript:void(0)">人工坐席</a></li>
-		   			</#if>
 		   		</ul>
 	   		</div>
 	    </div>
         <div class="content-left">
             <div class="chat-above" id="above">
-            	<div class="clearfix message  welcome"> <span id="welcome-message">${(inviteData.dialog_message!'欢迎您来咨询！所有客户均可以免费注册试用，有关技术支持和商业咨询可以申请加入我们官方QQ群：555834343.')?no_esc}</span></div>
-				<#if chatMessageList?? && chatMessageList.content??>
-					<#list chatMessageList.content?reverse as chatMessage>
-						<#if chatMessage.userid?? && userid?? && chatMessage.calltype?? && chatMessage.calltype = "in">
-							<div class="clearfix chat-block">
+            	<div class="clearfix message  welcome"> <span id="welcome-message">欢迎您来咨询！所有客户均可以免费注册试用</span></div>
+				 			<div class="clearfix chat-block">
 								<div class="chat-right"> 
 									<img class="user-img" src="/im/img/user.png" alt="">
 									<div class="chat-message">
-										<label class="time">${chatMessage.createtime!''}</label>
-										<label class="user">${chatMessage.username!''}</label> 
+										<label class="time"></label>
+										<label class="user"></label> 
 									</div>
 									<div class="chatting-right">
 										<i class="arrow arrow${inviteData.consult_dialog_color!''}"></i>
@@ -229,7 +220,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 								</div>
 							</div>
-						<#else>
+					 
 							<div class="clearfix chat-block">
 								<div class="chat-left"> 
 									<img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image.html?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt="">
@@ -239,13 +230,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 									<div class="chatting-left">
 										<i class="arrow"></i>
-										<div class="chat-content"><#include "/apps/im/media/message.html"></div>
+										<div class="chat-content"></div>
 									</div>
 								</div>
 							</div>
-						</#if>
-					</#list>
-				</#if>
 			</div>
             <div class="chat-bottom" id="bottom">
 				<textarea id="message" name="content" style="visibility:hidden;"></textarea>
