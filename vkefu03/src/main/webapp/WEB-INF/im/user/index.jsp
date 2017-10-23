@@ -379,6 +379,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					message : message
 				});
 			}
+			
 		}else if(service_end == true){
 			alert("坐席已断开和您的对话");	
 		}
