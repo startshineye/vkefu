@@ -1,6 +1,7 @@
 package com.yxm.util.server.handler;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -15,6 +16,7 @@ import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
 import com.yxm.core.Context;
+import com.yxm.util.DateUtil;
 import com.yxm.util.cache.ClientCache;
 import com.yxm.util.server.message.ChatMessage;
 
@@ -59,19 +61,21 @@ public class IMEventHandler {
    @OnEvent(value = "message")
    public void onEvent(SocketIOClient client,AckRequest request,ChatMessage message){
 	   System.out.println(" 发送消息 ["+message+"]");
-	   
-	   //组装消息发送给用户端
+	   String time = DateUtil.datetimeFormat.format(new Date());
+	   String userid = message.getUserid();
+	   //组装消息
 	   ChatMessage chatMessage = new ChatMessage();
-	   //chatMessage.setName(message.getName());
+	   chatMessage.setAgentid("1101");
+	   chatMessage.setCalltype("out");
+	   chatMessage.setCreatetime(time);
 	   chatMessage.setMessage(message.getMessage());
-	   
+	   chatMessage.setSessionid(message.getSessionid());
+	   chatMessage.setType(message.getType());
+	   chatMessage.setUserid(userid);
 	   //推送消息
-	   //client.sendEvent("message", chatMessage);
-	   System.out.println("userlist size"+userlist.size());
-	   for (String userid : userlist) {
-		  ClientCache.getInstance().sendIMEventMessage(userid, "message", chatMessage);
+	    if(!StringUtils.isBlank(userid)){
+	    	ClientCache.getInstance().sendIMEventMessage(userid, "message", chatMessage);
 	    }
-	   System.out.println("*******message**********"+client+" userlist"+userlist);
    }
    //断开连接
    @OnDisconnect 

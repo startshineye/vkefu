@@ -314,6 +314,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
   //定义变量
  var userId ="${userId}";
+ var agentId="";
  var hostName="${hostName}";
  var port="${port}";
  var schema="${schema}";
