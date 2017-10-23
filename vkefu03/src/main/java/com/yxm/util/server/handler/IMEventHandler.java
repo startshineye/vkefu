@@ -55,7 +55,6 @@ public class IMEventHandler {
 		   }
 	   }
    }
-   
    //消息入口
    @OnEvent(value = "message")
    public void onEvent(SocketIOClient client,AckRequest request,ChatMessage message){
