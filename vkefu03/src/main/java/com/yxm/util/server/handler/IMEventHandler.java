@@ -48,6 +48,17 @@ public class IMEventHandler {
 	   System.out.println("*******onConnect**********"+client+" userlist"+userlist);
 	   System.out.println("userId:"+userId+" userName:"+userName+" sessionId:"+sessionId);
 	   System.out.println("serverNameSpace:"+Context.NameSpaceEnum.IM.getNamespace());
+	   /**
+	    * 用户进入到对话连接
+	    */
+	   
+	   /**
+	    * 用户加入缓存
+	    */
+	   
+	   /**
+	    * 发送分配坐席后的消息
+	    */
 	   //加入缓存
 	   if(!StringUtils.isBlank(userId)){
 		   if(!this.userlist.contains(userId)){
