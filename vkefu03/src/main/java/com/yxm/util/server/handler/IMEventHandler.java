@@ -17,8 +17,10 @@ import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
 import com.yxm.core.Context;
 import com.yxm.util.DateUtil;
+import com.yxm.util.OnlineUtil;
 import com.yxm.util.cache.ClientCache;
 import com.yxm.util.server.message.ChatMessage;
+import com.yxm.web.domain.MessageVO;
 
 /**
  * webcc事件处理
@@ -36,7 +38,6 @@ public class IMEventHandler {
 	   this.server = server;
    }
    
-   
    // 建立连接
    @OnConnect
    public void onConnect(SocketIOClient client){
@@ -51,22 +52,17 @@ public class IMEventHandler {
 	   /**
 	    * 用户进入到对话连接
 	    */
-	   
+	   MessageVO message = OnlineUtil.getRequestMessage(userId,userName,client);
 	   /**
 	    * 用户加入缓存
 	    */
-	   
+	   if(!StringUtils.isBlank(userId)){
+		    ClientCache.getInstance().putIMEventClient(userId, client);
+	   }
 	   /**
 	    * 发送分配坐席后的消息
 	    */
-	   //加入缓存
-	   if(!StringUtils.isBlank(userId)){
-		   if(!this.userlist.contains(userId)){
-			   System.out.println(!this.userlist.contains(userId)+"onConnect addlist"+userId+" size="+this.userlist.size());
-			   ClientCache.getInstance().putIMEventClient(userId, client);
-			   this.userlist.add(userId);
-		   }
-	   }
+	   client.sendEvent(Context.MessageTypeEnum.STATUS.toString(), message);
    }
    //消息入口
    @OnEvent(value = "message")

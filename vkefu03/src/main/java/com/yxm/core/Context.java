@@ -25,4 +25,15 @@ public class Context {
 			return super.toString().toLowerCase() ;
 		}
 	}
+	
+	public enum MessageTypeEnum{
+		NEW,
+		MESSAGE, 
+		END,
+		TRANS, STATUS , AGENTSTATUS , SERVICE, WRITING;
+		
+		public String toString(){
+			return super.toString().toLowerCase() ;
+		}
+	}
 }
