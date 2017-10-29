@@ -50,7 +50,7 @@ public class AgentEventHandler{
 		chatMessage.setMessage(message.getMessage());
 		
 		//发送
-		ClientCache.getInstance().setAgentEventMessage(message.getAgentid(), "message", chatMessage);
+		ClientCache.getInstance().sendAgentEventMessage(message.getAgentid(), "message", chatMessage);
 		System.out.println("agent Onmessage [message:"+message+" sessionId:"+client.getSessionId().toString()+"]");
 	}
 	

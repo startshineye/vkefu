@@ -72,7 +72,7 @@ public class IMEventHandler {
 	   String userid = message.getUserid();
 	   //组装消息
 	   ChatMessage chatMessage = new ChatMessage();
-	   chatMessage.setAgentid("1101");
+	   chatMessage.setAgentid(message.getAgentid());
 	   chatMessage.setCalltype("out");
 	   chatMessage.setCreatetime(time);
 	   chatMessage.setMessage(message.getMessage());
@@ -81,7 +81,10 @@ public class IMEventHandler {
 	   chatMessage.setUserid(userid);
 	   //推送消息
 	    if(!StringUtils.isBlank(userid)){
+	    	chatMessage.setCalltype("in");
 	    	ClientCache.getInstance().sendIMEventMessage(userid, "message", chatMessage);
+	    	chatMessage.setCalltype("out");
+	    	ClientCache.getInstance().sendAgentEventMessage(message.getAgentid(), "message", chatMessage);
 	    }
    }
    //断开连接

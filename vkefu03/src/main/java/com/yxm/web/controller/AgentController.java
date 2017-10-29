@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yxm.util.Tools;
+import com.yxm.util.factory.ACDFactory;
+import com.yxm.web.entity.agent.Agent;
 
 @Controller
 @RequestMapping("/agent")
@@ -26,6 +28,12 @@ public class AgentController {
 		model.addObject("port", request.getServerPort());
 		model.addObject("schema", request.getScheme()) ;
 		System.out.println("agentId:"+agentId+" agentName:"+agentName+" session:"+sessionId);
+		
+		//进入队列
+		Agent agent = new Agent();
+		agent.setAgentId(agentId);
+		agent.setAgentName(agentName);
+		ACDFactory.freeAgentQueue.add(agent);
 		return model;
    }
    

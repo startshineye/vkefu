@@ -341,6 +341,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        document.getElementById('connect-message').innerHTML=data.message;
     })
     socket.on("status",function(data){
+        agentId=data.fromId;
 		output('<span id="connect-message">'+data.message+'</span>' , 'message connect-message');     
 		if(data.messageType == "end"){
 			service_end = true ;
@@ -359,7 +360,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			output('<div class="chat-left"> <img class="user-img" src="" alt=""><div class="chat-message"><label  class="user">'+data.nickName+'</label><label class="time">'+data.createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");	
 		}
     });
-    
     socket.on('disconnect',function() {
         output('<span id="connect-message">连接坐席失败，在线咨询服务不可用</span>' , 'message connect-message');
     });

@@ -53,7 +53,7 @@ public class ClientCache {
 	   agentClients.removeClient(id, sessionId);
    }
    
-   public void setAgentEventMessage(String id,String event,Object data){
+   public void sendAgentEventMessage(String id,String event,Object data){
 	   List<SocketIOClient> clients = agentClients.getClients(id);
 	   for (SocketIOClient client : clients) {
 		   client.sendEvent(event, data);

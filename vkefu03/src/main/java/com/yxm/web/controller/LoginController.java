@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yxm.core.Context;
+import com.yxm.util.factory.ACDFactory;
 import com.yxm.web.entity.agent.Agent;
 @Controller
 @RequestMapping("/system")
@@ -56,6 +57,9 @@ public class LoginController {
 		 ModelAndView modelAndView = new ModelAndView();
 		 modelAndView.addObject("agent", agent);
 		 modelAndView.setViewName("system/index/index");
+		//进入队列
+		agent.setGroups("webcc");
+		ACDFactory.freeAgentQueue.add(agent);
 		 return modelAndView;
 	}
 }

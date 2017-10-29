@@ -58,24 +58,13 @@ public class ACDFactory {
 			   if(agent!=null){
 				   //查询含有group的对象
 				   if(agent.getGroups().contains(group)){
-					     //获取最新的agent
-					     Agent lastAgent = createAgentManager().getAgent(agent.getAgentId());
-					     Integer maxusers=0;
-					    // String getagentmaxuser = getagentmaxuser(lastAgent.getAgentId());
-					     //目前写死,设计为可以接受5个
-					     String getagentmaxuser = "5";
-					     if(!getagentmaxuser.equals("-1")){
-					    	 maxusers=Integer.parseInt(getagentmaxuser);
-					     } 
-					     if(lastAgent.getSerUsernum()<maxusers){
-					    	 //获取对象
-						     temp = agent;
-					    	 //先踢出
-		                      freeAgentQueue.remove(temp);
-		                      //然后放到最后面
-		                      freeAgentQueue.add(temp);
-		                      break;
-					     }
+			    	   //获取对象
+				       temp = agent;
+			    	  //先踢出
+                       freeAgentQueue.remove(temp);
+                       //然后放到最后面
+                       freeAgentQueue.add(temp);
+                       break;
 				   } 
 			   }
 		    }
